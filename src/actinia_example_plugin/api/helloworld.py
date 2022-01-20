@@ -30,8 +30,9 @@ from flask_restful_swagger_2 import swagger
 from flask_restful_swagger_2 import Resource
 
 from actinia_example_plugin.apidocs import helloworld
-from actinia_example_plugin.model.response_models import \
-    SimpleStatusCodeResponseModel
+from actinia_example_plugin.model.response_models import (
+    SimpleStatusCodeResponseModel,
+)
 from actinia_example_plugin.core.example import transform_input
 
 

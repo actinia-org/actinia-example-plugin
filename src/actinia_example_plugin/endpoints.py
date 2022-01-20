@@ -33,4 +33,4 @@ def create_endpoints(flask_api):
 
     apidoc = flask_api
 
-    apidoc.add_resource(HelloWorld, '/helloworld')
+    apidoc.add_resource(HelloWorld, "/helloworld")

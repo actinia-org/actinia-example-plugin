@@ -29,10 +29,10 @@ from actinia_example_plugin.core.example import transform_input
 
 
 @pytest.mark.unittest
-@pytest.mark.parametrize("inp,ref_out", [
-    ("test", "Hello world TEST!"),
-    ("bla23", "Hello world BLA23!")
-])
+@pytest.mark.parametrize(
+    "inp,ref_out",
+    [("test", "Hello world TEST!"), ("bla23", "Hello world BLA23!")],
+)
 def test_transform_input(inp, ref_out):
     """Test for tranform_input function."""
     out = transform_input(inp)

@@ -25,8 +25,9 @@ __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH % Co. KG"
 
 
-from actinia_example_plugin.model.response_models import \
-    SimpleStatusCodeResponseModel
+from actinia_example_plugin.model.response_models import (
+    SimpleStatusCodeResponseModel,
+)
 
 
 describeHelloWorld_get_docs = {
@@ -36,9 +37,9 @@ describeHelloWorld_get_docs = {
     "responses": {
         "200": {
             "description": "This response returns the string 'Hello World!'",
-            "schema": SimpleStatusCodeResponseModel
+            "schema": SimpleStatusCodeResponseModel,
         }
-    }
+    },
 }
 
 describeHelloWorld_post_docs = {
@@ -48,8 +49,8 @@ describeHelloWorld_post_docs = {
     "responses": {
         "200": {
             "description": "This response returns the string 'Hello World "
-                           "NAME!'",
-            "schema": SimpleStatusCodeResponseModel
+            "NAME!'",
+            "schema": SimpleStatusCodeResponseModel,
         },
         "400": {
             "description": "This response returns a detail error message",
@@ -59,10 +60,10 @@ describeHelloWorld_post_docs = {
                     "message": {
                         "type": "string",
                         "description": "detailed message",
-                        "example": "Missing name in JSON content"
+                        "example": "Missing name in JSON content",
                     }
-                }
-            }
-        }
-    }
+                },
+            },
+        },
+    },
 }
