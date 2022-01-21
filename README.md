@@ -75,3 +75,5 @@ python3 setup.py test --addopts "-m 'dev'"
 ## Starting steps for own plugin
 If you want to have your onw plugin you can use this repo to create it by doing
 the following.
+
+TODO
