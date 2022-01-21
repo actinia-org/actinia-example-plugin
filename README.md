@@ -73,7 +73,18 @@ python3 setup.py test --addopts "-m 'dev'"
 ```
 
 ## Starting steps for own plugin
-If you want to have your onw plugin you can use this repo to create it by doing
-the following.
+If you want to have your onw plugin you can use this repo to create it by
+executing the `scripts/create_own_plugin.sh`.
 
-TODO
+If you want the repo in git then you have to create first a empty git repository
+and then run the script and follow the last instructions which gives the script
+to upload the initial code to your git repository.
+```
+bash create_own_plugin.sh actinia-ex2-plugin git
+```
+
+If you only want your own plugin in a folder and not in git you can execute the
+script like this:
+```
+bash create_own_plugin.sh actinia-ex2-plugin
+```
