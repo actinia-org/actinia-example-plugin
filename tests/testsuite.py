@@ -26,7 +26,6 @@ __maintainer__ = "mundialis GmbH % Co. KG"
 
 
 import base64
-import json
 import unittest
 
 import pwgen
@@ -34,7 +33,7 @@ from werkzeug.datastructures import Headers
 
 from actinia_core.endpoints import create_endpoints
 from actinia_core.core.common import redis_interface
-from actinia_core.core.common.app import flask_app, URL_PREFIX
+from actinia_core.core.common.app import flask_app
 from actinia_core.core.common.config import global_config
 from actinia_core.core.common.user import ActiniaUser
 from actinia_core.models.response_models import ProcessingResponseModel
