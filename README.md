@@ -4,12 +4,6 @@ This is an example plugin for actinia-core which adds a "Hello World" endpoint t
 
 You can run actinia-example-plugin as actinia-core plugin.
 
-TODO
-* linting/black
-* workflows
-  * linting
-  * tests
-
 ## Installation
 Use docker-compose for installation:
 ```
