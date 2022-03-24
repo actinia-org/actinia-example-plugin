@@ -29,7 +29,7 @@ import json
 import pytest
 from flask import Response
 
-from actinia_core.core.common.app import URL_PREFIX
+from actinia_api import URL_PREFIX
 
 from ..testsuite import ActiniaTestCase
 
