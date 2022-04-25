@@ -53,23 +53,28 @@ Otherwise you will get an error like this
 * If you make changes in code and nothing changes you can try to uninstall the plugin:
 ```
 pip3 uninstall actinia-example-plugin.wsgi -y
+rm -rf /usr/lib/python3.8/site-packages/actinia_example_plugin.wsgi-*.egg
 ```
 
 ### Running tests
-You can run the tests in the actinia docker:
+You can run the tests in the actinia test docker:
+
 ```
+docker build -f docker/actinia-example-plugin-test/Dockerfile -t actinia-example-plugin-test .
+docker run -it actinia-example-plugin-test -i
+
 cd /src/actinia-example-plugin/
 
 # run all tests
-python3 setup.py test
+make test
 
 # run only unittests
-python3 setup.py test --addopts "-m 'unittest'"
+make unittest
 # run only integrationtests
-python3 setup.py test --addopts "-m 'integrationtest'"
+make integrationtest
 
 # run only tests which are marked for development with the decorator '@pytest.mark.dev'
-python3 setup.py test --addopts "-m 'dev'"
+make devtest
 ```
 
 ## Starting steps for own plugin
