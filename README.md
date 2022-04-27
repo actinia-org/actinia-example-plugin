@@ -23,9 +23,9 @@ docker-compose -f docker/docker-compose.yml up -d
 ### Requesting helloworld endpoint
 You can test the plugin and request the `/helloworld` endpoint, e.g. with:
 ```
-curl -u actinia-gdi:actinia-gdi -X GET http://localhost:8088/api/v2/helloworld | jq
+curl -u actinia-gdi:actinia-gdi -X GET http://localhost:8088/api/v3/helloworld | jq
 
-curl -u actinia-gdi:actinia-gdi -H 'accept: application/json' -H 'Content-Type: application/json' -X POST http://localhost:8088/api/v2/helloworld -d '{"name": "test"}' | jq
+curl -u actinia-gdi:actinia-gdi -H 'accept: application/json' -H 'Content-Type: application/json' -X POST http://localhost:8088/api/v3/helloworld -d '{"name": "test"}' | jq
 ```
 
 ## DEV setup
@@ -53,23 +53,28 @@ Otherwise you will get an error like this
 * If you make changes in code and nothing changes you can try to uninstall the plugin:
 ```
 pip3 uninstall actinia-example-plugin.wsgi -y
+rm -rf /usr/lib/python3.8/site-packages/actinia_example_plugin.wsgi-*.egg
 ```
 
 ### Running tests
-You can run the tests in the actinia docker:
+You can run the tests in the actinia test docker:
+
 ```
+docker build -f docker/actinia-example-plugin-test/Dockerfile -t actinia-example-plugin-test .
+docker run -it actinia-example-plugin-test -i
+
 cd /src/actinia-example-plugin/
 
 # run all tests
-python3 setup.py test
+make test
 
 # run only unittests
-python3 setup.py test --addopts "-m 'unittest'"
+make unittest
 # run only integrationtests
-python3 setup.py test --addopts "-m 'integrationtest'"
+make integrationtest
 
 # run only tests which are marked for development with the decorator '@pytest.mark.dev'
-python3 setup.py test --addopts "-m 'dev'"
+make devtest
 ```
 
 ## Starting steps for own plugin
