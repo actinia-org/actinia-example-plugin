@@ -95,3 +95,18 @@ script like this:
 ```
 bash create_own_plugin.sh actinia-ex2-plugin
 ```
+
+## Hint for the development of actinia plugins
+
+### skip permission check
+The parameter [`skip_permission_check`](https://github.com/mundialis/actinia_core/blob/main/src/actinia_core/processing/actinia_processing/ephemeral_processing.py#L1420-L1422) (see [example in actinia-statistic plugin](https://github.com/mundialis/actinia_statistic_plugin/blob/master/src/actinia_statistic_plugin/vector_sampling.py#L207))
+should only be set to `True` if you are sure that you really don't want to check the permissions.
+
+The skip of the permission check leads to a skipping of:
+* [the module check](https://github.com/mundialis/actinia_core/blob/main/src/actinia_core/processing/actinia_processing/ephemeral_processing.py#L579-L589)
+* [the limit of the number of processes](https://github.com/mundialis/actinia_core/blob/main/src/actinia_core/processing/actinia_processing/ephemeral_processing.py#L566-L570)
+* the limit of the processing time
+
+Not skipped are:
+* the limit of the cells
+* the mapset/location limitations of the user
