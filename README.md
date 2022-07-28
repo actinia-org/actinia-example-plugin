@@ -23,9 +23,9 @@ docker-compose -f docker/docker-compose.yml up -d
 ### Requesting helloworld endpoint
 You can test the plugin and request the `/helloworld` endpoint, e.g. with:
 ```
-curl -u actinia-gdi:actinia-gdi -X GET http://localhost:8088/api/v2/helloworld | jq
+curl -u actinia-gdi:actinia-gdi -X GET http://localhost:8088/api/v3/helloworld | jq
 
-curl -u actinia-gdi:actinia-gdi -H 'accept: application/json' -H 'Content-Type: application/json' -X POST http://localhost:8088/api/v2/helloworld -d '{"name": "test"}' | jq
+curl -u actinia-gdi:actinia-gdi -H 'accept: application/json' -H 'Content-Type: application/json' -X POST http://localhost:8088/api/v3/helloworld -d '{"name": "test"}' | jq
 ```
 
 ## DEV setup
