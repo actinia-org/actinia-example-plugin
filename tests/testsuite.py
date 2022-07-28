@@ -39,11 +39,6 @@ from actinia_core.core.common.user import ActiniaUser
 from actinia_core.models.response_models import ProcessingResponseModel
 
 
-# actinia-module-plugin endpoints are included as defined in actinia_core
-# config
-create_endpoints()
-
-
 class ActiniaTestCase(unittest.TestCase):
 
     # guest = None

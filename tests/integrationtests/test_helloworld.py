@@ -38,7 +38,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
     @pytest.mark.integrationtest
     def test_get_helloworld(self):
         """Test the get method of the /helloworld endpoint"""
-        resp = self.server.get(URL_PREFIX + "/helloworld")
+        resp = self.app.get(URL_PREFIX + "/helloworld")
 
         assert type(resp) is Response, "The response is not of type Response"
         assert resp.status_code == 200, "The status code is not 200"
@@ -54,7 +54,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
     def test_post_helloworld(self):
         """Test the post method of the /helloworld endpoint"""
         postbody = {"name": "test"}
-        resp = self.server.post(
+        resp = self.app.post(
             URL_PREFIX + "/helloworld",
             headers=self.user_auth_header,
             data=json.dumps(postbody),
@@ -74,7 +74,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
     def test_post_helloworld_error(self):
         """Test the post method of the /helloworld endpoint"""
         postbody = {"namee": "test"}
-        resp = self.server.post(
+        resp = self.app.post(
             URL_PREFIX + "/helloworld",
             headers=self.user_auth_header,
             data=json.dumps(postbody),
