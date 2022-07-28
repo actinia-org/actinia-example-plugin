@@ -1,4 +1,4 @@
-FROM mundialis/actinia-core:4.1.0
+FROM mundialis/actinia-core:latest
 
 # pwgen is needed for the tests
 RUN pip3 install pwgen

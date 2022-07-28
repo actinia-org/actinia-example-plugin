@@ -4,6 +4,8 @@
 *.so
 *.cfg
 !setup.cfg
+!docker/actinia.cfg
+!docker/actinia-example-plugin-test/actinia-example-plugin-test.cfg
 *.orig
 *.log
 *.pot

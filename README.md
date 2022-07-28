@@ -1,8 +1,8 @@
 # actinia-example-plugin
 
-This is an example plugin for actinia-core which adds a "Hello World" endpoint to actinia-core.
+This is an example plugin for [actinia-core](https://github.com/mundialis/actinia_core) which adds a "Hello World" endpoint to actinia-core.
 
-You can run actinia-example-plugin as actinia-core plugin.
+You can run actinia-example-plugin as an actinia-core plugin.
 
 ## Installation
 Use docker-compose for installation:
@@ -53,38 +53,45 @@ Otherwise you will get an error like this
 * If you make changes in code and nothing changes you can try to uninstall the plugin:
 ```
 pip3 uninstall actinia-example-plugin.wsgi -y
+rm -rf /usr/lib/python3.8/site-packages/actinia_example_plugin.wsgi-*.egg
 ```
 
 ### Running tests
-You can run the tests in the actinia docker:
+You can run the tests in the actinia test docker:
+
 ```
+docker build -f docker/actinia-example-plugin-test/Dockerfile -t actinia-example-plugin-test .
+docker run -it actinia-example-plugin-test -i
+
 cd /src/actinia-example-plugin/
 
 # run all tests
-python3 setup.py test
+make test
 
 # run only unittests
-python3 setup.py test --addopts "-m 'unittest'"
+make unittest
 # run only integrationtests
-python3 setup.py test --addopts "-m 'integrationtest'"
+make integrationtest
 
 # run only tests which are marked for development with the decorator '@pytest.mark.dev'
-python3 setup.py test --addopts "-m 'dev'"
+make devtest
 ```
 
 ## Starting steps for own plugin
-If you want to have your onw plugin you can use this repo to create it by
+If you want to have your own plugin you can use this repo to create it by
 executing the `scripts/create_own_plugin.sh`.
 
-If you want the repo in git then you have to create first a empty git repository
-and then run the script and follow the last instructions which gives the script
+If you want the repo in git then you first have to create an empty git repository
+and then run the script. Then follow the last instructions from the script
 to upload the initial code to your git repository.
+
 ```
 bash create_own_plugin.sh actinia-ex2-plugin git
 ```
 
 If you only want your own plugin in a folder and not in git you can execute the
 script like this:
+
 ```
 bash create_own_plugin.sh actinia-ex2-plugin
 ```
