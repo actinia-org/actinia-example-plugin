@@ -31,8 +31,10 @@ from flask import Response
 
 from actinia_api import URL_PREFIX
 
+from ..testsuite import ActiniaTestCase
 
-class ActiniaHelloWorldTest(ActiniaResourceTestCaseBase):
+
+class ActiniaHelloWorldTest(ActiniaTestCase):
     @pytest.mark.integrationtest
     def test_get_helloworld(self):
         """Test the get method of the /helloworld endpoint"""
