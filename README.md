@@ -44,7 +44,7 @@ gunicorn -b 0.0.0.0:8088 -w 1 --access-logfile=- -k gthread actinia_core.main:fl
 
 * If you have no `.git` folder in the plugin folder, you need to set the
 `SETUPTOOLS_SCM_PRETEND_VERSION` before installing the plugin:
-```
+```bash
 export SETUPTOOLS_SCM_PRETEND_VERSION=0.0
 ```
 Otherwise you will get an error like this
