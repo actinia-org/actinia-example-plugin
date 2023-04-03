@@ -30,7 +30,6 @@ from actinia_example_plugin.api.helloworld import HelloWorld
 
 # endpoints loaded if run as actinia-core plugin as well as standalone app
 def create_endpoints(flask_api):
-
     apidoc = flask_api
 
     apidoc.add_resource(HelloWorld, "/helloworld")
