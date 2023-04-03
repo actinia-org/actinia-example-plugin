@@ -104,30 +104,39 @@ setup_environment()
 
 class ActiniaResourceTestCaseBase(ActiniaTestCaseBase):
     @classmethod
-    def create_user(cls, name="guest", role="guest",
-                    group="group", password="abcdefgh",
-                    accessible_datasets=None, process_num_limit=1000,
-                    process_time_limit=6000, accessible_modules=None):
-
-        auth = bytes('%s:%s' % (name, password), "utf-8")
+    def create_user(
+        cls,
+        name="guest",
+        role="guest",
+        group="group",
+        password="abcdefgh",
+        accessible_datasets=None,
+        process_num_limit=1000,
+        process_time_limit=6000,
+        accessible_modules=None,
+    ):
+        auth = bytes("%s:%s" % (name, password), "utf-8")
 
         # We need to create an HTML basic authorization header
         cls.auth_header[role] = Headers()
-        cls.auth_header[role].add('Authorization',
-                                  'Basic ' + base64.b64encode(auth).decode())
+        cls.auth_header[role].add(
+            "Authorization", "Basic " + base64.b64encode(auth).decode()
+        )
 
         # Make sure the user database is empty
         user = ActiniaUser(name)
         if user.exists():
             user.delete()
         # Create a user in the database
-        user = ActiniaUser.create_user(name,
-                                       group,
-                                       password,
-                                       user_role=role,
-                                       accessible_datasets=accessible_datasets,
-                                       process_num_limit=process_num_limit,
-                                       process_time_limit=process_time_limit)
+        user = ActiniaUser.create_user(
+            name,
+            group,
+            password,
+            user_role=role,
+            accessible_datasets=accessible_datasets,
+            process_num_limit=process_num_limit,
+            process_time_limit=process_time_limit,
+        )
         if accessible_modules is None:
             accessible_modules = ["sleep"]
         user.add_accessible_modules(accessible_modules)

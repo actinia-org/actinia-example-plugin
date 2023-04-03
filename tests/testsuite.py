@@ -39,7 +39,6 @@ from actinia_core.models.response_models import ProcessingResponseModel
 
 
 class ActiniaTestCase(unittest.TestCase):
-
     # guest = None
     # admin = None
     # superadmin = None
@@ -48,7 +47,7 @@ class ActiniaTestCase(unittest.TestCase):
     users_list = []
 
     def setUp(self):
-        """ Overwrites method setUp from unittest.TestCase class"""
+        """Overwrites method setUp from unittest.TestCase class"""
 
         self.app_context = flask_app.app_context()
         self.app_context.push()
@@ -123,7 +122,7 @@ class ActiniaTestCase(unittest.TestCase):
         # create_process_queue(config=global_config)
 
     def tearDown(self):
-        """ Overwrites method tearDown from unittest.TestCase class"""
+        """Overwrites method tearDown from unittest.TestCase class"""
 
         self.app_context.pop()
 
@@ -143,7 +142,6 @@ class ActiniaTestCase(unittest.TestCase):
         process_num_limit=1000,
         process_time_limit=6000,
     ):
-
         auth = bytes("%s:%s" % (name, password), "utf-8")
         # We need to create an HTML basic authorization header
         self.auth_header[role] = Headers()
