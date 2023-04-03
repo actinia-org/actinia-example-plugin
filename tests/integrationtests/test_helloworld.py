@@ -40,7 +40,9 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
         """Test the get method of the /helloworld endpoint"""
         resp = self.app.get(URL_PREFIX + "/helloworld")
 
-        assert type(resp) is Response, "The response is not of type Response"
+        assert isinstance(
+            resp, Response
+        ), "The response is not of type Response"
         assert resp.status_code == 200, "The status code is not 200"
         assert hasattr(resp, "json"), "The response has no attribute 'json'"
         assert "message" in resp.json, (
@@ -60,7 +62,9 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             data=json.dumps(postbody),
             content_type="application/json",
         )
-        assert type(resp) is Response, "The response is not of type Response"
+        assert isinstance(
+            resp, Response
+        ), "The response is not of type Response"
         assert resp.status_code == 200, "The status code is not 200"
         assert hasattr(resp, "json"), "The response has no attribute 'json'"
         assert "message" in resp.json, (
@@ -80,6 +84,8 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             data=json.dumps(postbody),
             content_type="application/json",
         )
-        assert type(resp) is Response, "The response is not of type Response"
+        assert isinstance(
+            resp, Response
+        ), "The response is not of type Response"
         assert resp.status_code == 400, "The status code is not 400"
         assert resp.data == b"Missing name in JSON content"
