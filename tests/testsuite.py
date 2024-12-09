@@ -39,6 +39,8 @@ from actinia_core.models.response_models import ProcessingResponseModel
 
 
 class ActiniaTestCase(unittest.TestCase):
+    """"Actinia test case class"""
+
     # guest = None
     # admin = None
     # superadmin = None
@@ -142,11 +144,12 @@ class ActiniaTestCase(unittest.TestCase):
         process_num_limit=1000,
         process_time_limit=6000,
     ):
-        auth = bytes("%s:%s" % (name, password), "utf-8")
+        """Create actinia user"""
+        auth = bytes(f"{name}:{password}", "utf-8")
         # We need to create an HTML basic authorization header
         self.auth_header[role] = Headers()
         self.auth_header[role].add(
-            "Authorization", "Basic " + base64.b64encode(auth).decode()
+            "Authorization", f"Basic {base64.b64encode(auth).decode()}"
         )
 
         # Make sure the user database is empty
