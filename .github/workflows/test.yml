@@ -1,3 +1,5 @@
+---
+
 name: actinia tests
 
 on:
@@ -14,8 +16,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      # with:
-      #   path: "."
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
     - name: Replace run only unittest command

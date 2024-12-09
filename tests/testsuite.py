@@ -172,7 +172,7 @@ class ActiniaTestCase(unittest.TestCase):
 
 def check_started_process(testCase, resp):
     """Checks response of started process - TODO: can be enhanced"""
-    if type(resp.json["process_results"]) == dict:
+    if type(resp.json["process_results"]) is dict:
         resp.json["process_results"] = str(resp.json["process_results"])
     resp_class = ProcessingResponseModel(**resp.json)
     assert resp_class["status"] == "accepted"

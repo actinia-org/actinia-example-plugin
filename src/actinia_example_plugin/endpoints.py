@@ -44,11 +44,10 @@ def create_project_endpoints(apidoc, projects_url_part="projects"):
 
     apidoc.add_resource(
         ProjectHelloWorld,
-        f"<string:project_name>/helloworld",
-        endpoint=get_endpoint_class_name(
-            ProjectHelloWorld, projects_url_part
-        ),
+        "<string:project_name>/helloworld",
+        endpoint=get_endpoint_class_name(ProjectHelloWorld, projects_url_part),
     )
+
 
 # endpoints loaded if run as actinia-core plugin as well as standalone app
 def create_endpoints(flask_api):
