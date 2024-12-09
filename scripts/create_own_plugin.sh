@@ -59,7 +59,7 @@ PLUGIN_NAME2=$(tr -s '-' '_' <<< "${PLUGIN_NAME}")
 
 
 # git clone git@github.com:mundialis/actinia-example-plugin.git
-git clone https://github.com/mundialis/actinia-example-plugin.git ${PLUGIN_NAME}
+git clone https://github.com/mundialis/actinia-example-plugin.git "${PLUGIN_NAME}"
 
 cd "${PLUGIN_NAME}" || exit
 
