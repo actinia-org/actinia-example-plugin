@@ -35,10 +35,12 @@ from ..testsuite import ActiniaTestCase
 
 
 class ActiniaHelloWorldTest(ActiniaTestCase):
+    """Actinia hello world test class for hello world endpoint"""
+
     @pytest.mark.integrationtest
     def test_get_helloworld(self):
         """Test the get method of the /helloworld endpoint"""
-        resp = self.app.get(URL_PREFIX + "/helloworld")
+        resp = self.app.get(f"{URL_PREFIX}/helloworld")
 
         assert isinstance(
             resp, Response
@@ -57,7 +59,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
         """Test the post method of the /helloworld endpoint"""
         postbody = {"name": "test"}
         resp = self.app.post(
-            URL_PREFIX + "/helloworld",
+            f"{URL_PREFIX}/helloworld",
             headers=self.user_auth_header,
             data=json.dumps(postbody),
             content_type="application/json",
@@ -79,7 +81,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
         """Test the post method of the /helloworld endpoint"""
         postbody = {"namee": "test"}
         resp = self.app.post(
-            URL_PREFIX + "/helloworld",
+            f"{URL_PREFIX}/helloworld",
             headers=self.user_auth_header,
             data=json.dumps(postbody),
             content_type="application/json",

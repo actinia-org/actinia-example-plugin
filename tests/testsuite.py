@@ -39,7 +39,7 @@ from actinia_core.models.response_models import ProcessingResponseModel
 
 
 class ActiniaTestCase(unittest.TestCase):
-    """"Actinia test case class"""
+    """Actinia test case class"""
 
     # guest = None
     # admin = None
@@ -84,7 +84,7 @@ class ActiniaTestCase(unittest.TestCase):
             self.user_id,
             self.user_group,
             self.user_auth_header,
-        ) = self.createUser(
+        ) = self.create_user(
             name="user",
             role="user",
             password=password,
@@ -96,7 +96,7 @@ class ActiniaTestCase(unittest.TestCase):
             self.restricted_user_id,
             self.restricuted_user_group,
             self.restricted_user_auth_header,
-        ) = self.createUser(
+        ) = self.create_user(
             name="user2",
             role="user",
             password=password,
@@ -109,7 +109,7 @@ class ActiniaTestCase(unittest.TestCase):
             self.admin_id,
             self.admin_group,
             self.admin_auth_header,
-        ) = self.createUser(
+        ) = self.create_user(
             name="admin",
             role="admin",
             password=password,
@@ -133,7 +133,7 @@ class ActiniaTestCase(unittest.TestCase):
             user.delete()
         redis_interface.disconnect()
 
-    def createUser(
+    def create_user(
         self,
         name="guest",
         role="guest",
@@ -173,9 +173,9 @@ class ActiniaTestCase(unittest.TestCase):
         return name, group, self.auth_header[role]
 
 
-def check_started_process(testCase, resp):
+def check_started_process(test_case, resp):
     """Checks response of started process - TODO: can be enhanced"""
-    if type(resp.json["process_results"]) is dict:
+    if isinstance(resp.json["process_results"], dict):
         resp.json["process_results"] = str(resp.json["process_results"])
     resp_class = ProcessingResponseModel(**resp.json)
     assert resp_class["status"] == "accepted"
@@ -183,7 +183,7 @@ def check_started_process(testCase, resp):
 
     # poll status_url
     # TODO: status stays in accepted
-    status_resp = testCase.app.get(
-        status_url, headers=testCase.user_auth_header
+    status_resp = test_case.app.get(
+        status_url, headers=test_case.user_auth_header
     )
     assert status_resp.json["urls"]["status"] == status_url

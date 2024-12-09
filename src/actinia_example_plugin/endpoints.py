@@ -24,11 +24,10 @@ __author__ = "Carmen Tawalika, Anika Weinmann"
 __copyright__ = "Copyright 2022-2024 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
+from actinia_core.endpoints import get_endpoint_class_name
 
 from actinia_example_plugin.api.helloworld import HelloWorld
 from actinia_example_plugin.api.project_helloworld import ProjectHelloWorld
-
-from actinia_core.endpoints import get_endpoint_class_name
 
 
 def create_project_endpoints(apidoc, projects_url_part="projects"):
@@ -51,6 +50,7 @@ def create_project_endpoints(apidoc, projects_url_part="projects"):
 
 # endpoints loaded if run as actinia-core plugin as well as standalone app
 def create_endpoints(flask_api):
+    """Create plugin endpoints"""
     apidoc = flask_api
 
     apidoc.add_resource(HelloWorld, "/helloworld")
