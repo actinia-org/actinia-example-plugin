@@ -22,7 +22,7 @@ Base class for GRASS GIS REST API tests
 __license__ = "GPLv3"
 __author__ = "Carmen Tawalika, Sören Gebbert"
 __copyright__ = "Copyright 2018-2022 mundialis GmbH & Co. KG"
-__maintainer__ = "mundialis GmbH % Co. KG"
+__maintainer__ = "mundialis GmbH & Co. KG"
 
 
 import base64

@@ -22,7 +22,7 @@ actinia plugin initalization
 __license__ = "GPLv3"
 __author__ = "Carmen Tawalika, Anika Weinmann"
 __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
-__maintainer__ = "mundialis GmbH % Co. KG"
+__maintainer__ = "mundialis GmbH & Co. KG"
 
 
 from pkg_resources import get_distribution, DistributionNotFound
