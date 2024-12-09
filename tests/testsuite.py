@@ -22,7 +22,7 @@ Base class for GRASS GIS REST API tests
 __license__ = "GPLv3"
 __author__ = "Carmen Tawalika, Sören Gebbert"
 __copyright__ = "Copyright 2018-2022 mundialis GmbH & Co. KG"
-__maintainer__ = "mundialis GmbH % Co. KG"
+__maintainer__ = "mundialis GmbH & Co. KG"
 
 
 import base64
@@ -39,6 +39,8 @@ from actinia_core.models.response_models import ProcessingResponseModel
 
 
 class ActiniaTestCase(unittest.TestCase):
+    """Actinia test case class"""
+
     # guest = None
     # admin = None
     # superadmin = None
@@ -82,7 +84,7 @@ class ActiniaTestCase(unittest.TestCase):
             self.user_id,
             self.user_group,
             self.user_auth_header,
-        ) = self.createUser(
+        ) = self.create_user(
             name="user",
             role="user",
             password=password,
@@ -94,7 +96,7 @@ class ActiniaTestCase(unittest.TestCase):
             self.restricted_user_id,
             self.restricuted_user_group,
             self.restricted_user_auth_header,
-        ) = self.createUser(
+        ) = self.create_user(
             name="user2",
             role="user",
             password=password,
@@ -107,7 +109,7 @@ class ActiniaTestCase(unittest.TestCase):
             self.admin_id,
             self.admin_group,
             self.admin_auth_header,
-        ) = self.createUser(
+        ) = self.create_user(
             name="admin",
             role="admin",
             password=password,
@@ -131,7 +133,7 @@ class ActiniaTestCase(unittest.TestCase):
             user.delete()
         redis_interface.disconnect()
 
-    def createUser(
+    def create_user(
         self,
         name="guest",
         role="guest",
@@ -142,11 +144,12 @@ class ActiniaTestCase(unittest.TestCase):
         process_num_limit=1000,
         process_time_limit=6000,
     ):
-        auth = bytes("%s:%s" % (name, password), "utf-8")
+        """Create actinia user"""
+        auth = bytes(f"{name}:{password}", "utf-8")
         # We need to create an HTML basic authorization header
         self.auth_header[role] = Headers()
         self.auth_header[role].add(
-            "Authorization", "Basic " + base64.b64encode(auth).decode()
+            "Authorization", f"Basic {base64.b64encode(auth).decode()}"
         )
 
         # Make sure the user database is empty
@@ -170,9 +173,9 @@ class ActiniaTestCase(unittest.TestCase):
         return name, group, self.auth_header[role]
 
 
-def check_started_process(testCase, resp):
+def check_started_process(test_case, resp):
     """Checks response of started process - TODO: can be enhanced"""
-    if type(resp.json["process_results"]) == dict:
+    if isinstance(resp.json["process_results"], dict):
         resp.json["process_results"] = str(resp.json["process_results"])
     resp_class = ProcessingResponseModel(**resp.json)
     assert resp_class["status"] == "accepted"
@@ -180,7 +183,7 @@ def check_started_process(testCase, resp):
 
     # poll status_url
     # TODO: status stays in accepted
-    status_resp = testCase.app.get(
-        status_url, headers=testCase.user_auth_header
+    status_resp = test_case.app.get(
+        status_url, headers=test_case.user_auth_header
     )
     assert status_resp.json["urls"]["status"] == status_url
