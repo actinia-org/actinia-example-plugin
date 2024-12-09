@@ -39,22 +39,23 @@ from actinia_example_plugin.core.example import transform_input
 class HelloWorld(Resource):
     """Returns 'Hello world!'"""
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Hello world class initialisation"""
         self.msg = "Hello world!"
 
     @swagger.doc(helloworld.describeHelloWorld_get_docs)
-    def get(self):
+    def get(self) -> SimpleStatusCodeResponseModel:
         """Get 'Hello world!' as answer string."""
         return SimpleStatusCodeResponseModel(status=200, message=self.msg)
 
     @swagger.doc(helloworld.describeHelloWorld_post_docs)
-    def post(self):
+    def post(self) -> SimpleStatusCodeResponseModel:
         """Hello World post method with name from postbody."""
 
         req_data = request.get_json(force=True)
         if isinstance(req_data, dict) is False or "name" not in req_data:
             return make_response("Missing name in JSON content", 400)
         name = req_data["name"]
-        msg = transform_input(name)
+        msg = f"{self.msg} {transform_input(name)}"
 
         return SimpleStatusCodeResponseModel(status=200, message=msg)
