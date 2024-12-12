@@ -15,8 +15,3 @@ jobs:
     #   VALIDATE_HTML: false
     #   VALIDATE_CSS: false
     #   VALIDATE_BASH_EXEC: false
-
-  post-pr-reviews:
-    needs: lint
-    if: ${{ needs.lint.result == 'failure' }}
-    uses: mundialis/github-workflows/.github/workflows/post-pr-reviews.yml@main
