@@ -23,8 +23,9 @@ __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 
-from actinia_example_plugin.model.response_models import \
-    SimpleStatusCodeResponseModel
+from actinia_example_plugin.model.response_models import (
+    SimpleStatusCodeResponseModel,
+)
 
 describe_hello_world_get_docs = {
     # "summary" is taken from the description of the get method

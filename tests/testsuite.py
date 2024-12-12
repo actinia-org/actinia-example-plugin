@@ -37,7 +37,6 @@ from werkzeug.datastructures import Headers
 
 class ActiniaTestCase(unittest.TestCase):
     """Actinia test case class."""
-
     # guest = None
     # admin = None
     # superadmin = None
@@ -45,7 +44,7 @@ class ActiniaTestCase(unittest.TestCase):
     auth_header = {}
     users_list = []
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Overwrites method setUp from unittest.TestCase class."""
 
         self.app_context = flask_app.app_context()
@@ -74,7 +73,7 @@ class ActiniaTestCase(unittest.TestCase):
 
         # create test user for roles user (more to come)
         accessible_datasets = {
-            "nc_spm_08": ["PERMANENT", "user1", "modis_lst"]
+            "nc_spm_08": ["PERMANENT", "user1", "modis_lst"],
         }
         password = pwgen.pwgen()
         (
@@ -120,7 +119,7 @@ class ActiniaTestCase(unittest.TestCase):
         #    create_process_queue
         # create_process_queue(config=global_config)
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         """Overwrites method tearDown from unittest.TestCase class."""
 
         self.app_context.pop()

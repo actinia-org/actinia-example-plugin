@@ -32,7 +32,7 @@ from actinia_example_plugin.core.example import transform_input
     "inp,ref_out",
     [("test", "Hello world TEST!"), ("bla23", "Hello world BLA23!")],
 )
-def test_transform_input(inp, ref_out):
+def test_transform_input(inp, ref_out) -> None:
     """Test for tranform_input function."""
     out = transform_input(inp)
     assert out == ref_out, f"Wrong result from transform_input for {inp}"

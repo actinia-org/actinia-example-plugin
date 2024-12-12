@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-"""
-Copyright (c) 2016-2022 mundialis GmbH & Co. KG
+"""Copyright (c) 2016-2022 mundialis GmbH & Co. KG
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -24,12 +23,11 @@ import os
 import signal
 import time
 
-from werkzeug.datastructures import Headers
-
-from actinia_core.testsuite import ActiniaTestCaseBase, URL_PREFIX
-from actinia_core.core.common.user import ActiniaUser
 from actinia_core.core.common.config import global_config
+from actinia_core.core.common.user import ActiniaUser
 from actinia_core.endpoints import create_endpoints
+from actinia_core.testsuite import ActiniaTestCaseBase
+from werkzeug.datastructures import Headers
 
 
 __license__ = "GPLv3"
@@ -124,7 +122,7 @@ class ActiniaResourceTestCaseBase(ActiniaTestCaseBase):
         # We need to create an HTML basic authorization header
         cls.auth_header[role] = Headers()
         cls.auth_header[role].add(
-            "Authorization", "Basic " + base64.b64encode(auth).decode()
+            "Authorization", f"Basic {base64.b64encode(auth).decode()}",
         )
 
         # Make sure the user database is empty
