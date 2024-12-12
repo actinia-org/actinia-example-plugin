@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Copyright (c) 2018-present mundialis GmbH & Co. KG
+Copyright (c) 2018-present mundialis GmbH & Co. KG.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ describeProjectHelloWorld_get_docs = {
         "200": {
             "description": "This response returns the string 'Hello World!'",
             "schema": SimpleStatusCodeResponseModel,
-        }
+        },
     },
 }
 
@@ -83,7 +83,7 @@ describeProjectHelloWorld_post_docs = {
                         "type": "string",
                         "description": "detailed message",
                         "example": "Missing name in JSON content",
-                    }
+                    },
                 },
             },
         },

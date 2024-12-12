@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Copyright (c) 2018-present mundialis GmbH & Co. KG
+Copyright (c) 2018-present mundialis GmbH & Co. KG.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,36 +27,35 @@ __maintainer__ = "mundialis GmbH & Co. KG"
 
 import json
 import pytest
+from actinia_api import URL_PREFIX
 from flask import Response
 
-from actinia_api import URL_PREFIX
-
-from ..testsuite import ActiniaTestCase
+from tests.testsuite import ActiniaTestCase
 
 
 class ActiniaHelloWorldTest(ActiniaTestCase):
-    """Actinia hello world test class for hello world endpoint"""
+    """Actinia hello world test class for hello world endpoint."""
 
     @pytest.mark.integrationtest
-    def test_get_helloworld(self):
-        """Test the get method of the /helloworld endpoint"""
+    def test_get_helloworld(self) -> None:
+        """Test the get method of the /helloworld endpoint."""
         resp = self.app.get(f"{URL_PREFIX}/helloworld")
 
         assert isinstance(
-            resp, Response
+            resp, Response,
         ), "The response is not of type Response"
         assert resp.status_code == 200, "The status code is not 200"
         assert hasattr(resp, "json"), "The response has no attribute 'json'"
         assert "message" in resp.json, (
-            "There is no 'message' inside the " "response"
+            "There is no 'message' inside the response"
         )
         assert resp.json["message"] == "Hello world!", (
-            "The response message" " is wrong"
+            "The response message is wrong"
         )
 
     @pytest.mark.integrationtest
-    def test_post_helloworld(self):
-        """Test the post method of the /helloworld endpoint"""
+    def test_post_helloworld(self) -> None:
+        """Test the post method of the /helloworld endpoint."""
         postbody = {"name": "test"}
         resp = self.app.post(
             f"{URL_PREFIX}/helloworld",
@@ -65,20 +64,20 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             content_type="application/json",
         )
         assert isinstance(
-            resp, Response
+            resp, Response,
         ), "The response is not of type Response"
         assert resp.status_code == 200, "The status code is not 200"
         assert hasattr(resp, "json"), "The response has no attribute 'json'"
         assert "message" in resp.json, (
-            "There is no 'message' inside the " "response"
+            "There is no 'message' inside the response"
         )
         assert resp.json["message"] == "Hello world TEST!", (
-            "The response " "message is wrong"
+            "The response message is wrong"
         )
 
     @pytest.mark.integrationtest
-    def test_post_helloworld_error(self):
-        """Test the post method of the /helloworld endpoint"""
+    def test_post_helloworld_error(self) -> None:
+        """Test the post method of the /helloworld endpoint."""
         postbody = {"namee": "test"}
         resp = self.app.post(
             f"{URL_PREFIX}/helloworld",
@@ -87,7 +86,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             content_type="application/json",
         )
         assert isinstance(
-            resp, Response
+            resp, Response,
         ), "The response is not of type Response"
         assert resp.status_code == 400, "The status code is not 400"
         assert resp.data == b"Missing name in JSON content"

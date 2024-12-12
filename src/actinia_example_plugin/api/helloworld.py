@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Copyright (c) 2018-present mundialis GmbH & Co. KG
+Copyright (c) 2018-present mundialis GmbH & Co. KG.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,22 +25,21 @@ __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 
-from flask import request, make_response
-from flask_restful_swagger_2 import swagger
-from flask_restful_swagger_2 import Resource
+from flask import make_response, request
+from flask_restful_swagger_2 import Resource, swagger
 
 from actinia_example_plugin.apidocs import helloworld
+from actinia_example_plugin.core.example import transform_input
 from actinia_example_plugin.model.response_models import (
     SimpleStatusCodeResponseModel,
 )
-from actinia_example_plugin.core.example import transform_input
 
 
 class HelloWorld(Resource):
-    """Returns 'Hello world!'"""
+    """Returns 'Hello world!'."""
 
     def __init__(self) -> None:
-        """Hello world class initialisation"""
+        """Hello world class initialisation."""
         self.msg = "Hello world!"
 
     @swagger.doc(helloworld.describeHelloWorld_get_docs)
@@ -51,7 +50,6 @@ class HelloWorld(Resource):
     @swagger.doc(helloworld.describeHelloWorld_post_docs)
     def post(self) -> SimpleStatusCodeResponseModel:
         """Hello World post method with name from postbody."""
-
         req_data = request.get_json(force=True)
         if isinstance(req_data, dict) is False or "name" not in req_data:
             return make_response("Missing name in JSON content", 400)

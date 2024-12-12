@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Copyright (c) 2018-present mundialis GmbH & Co. KG
+Copyright (c) 2018-present mundialis GmbH & Co. KG.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ from actinia_example_plugin.api.helloworld import HelloWorld
 from actinia_example_plugin.api.project_helloworld import ProjectHelloWorld
 
 
-def create_project_endpoints(apidoc, projects_url_part="projects"):
+def create_project_endpoints(apidoc, projects_url_part="projects") -> None:
     """
     Function to add resources with "project" inside the endpoint url.
 
@@ -49,8 +49,8 @@ def create_project_endpoints(apidoc, projects_url_part="projects"):
 
 
 # endpoints loaded if run as actinia-core plugin as well as standalone app
-def create_endpoints(flask_api):
-    """Create plugin endpoints"""
+def create_endpoints(flask_api) -> None:
+    """Create plugin endpoints."""
     apidoc = flask_api
 
     apidoc.add_resource(HelloWorld, "/helloworld")
