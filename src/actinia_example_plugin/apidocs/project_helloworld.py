@@ -28,7 +28,6 @@ from actinia_example_plugin.model.response_models import (
     SimpleStatusCodeResponseModel,
 )
 
-
 describeProjectHelloWorld_get_docs = {
     # "summary" is taken from the description of the get method
     "tags": ["example"],

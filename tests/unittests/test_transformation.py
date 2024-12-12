@@ -24,6 +24,7 @@ __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 import pytest
+
 from actinia_example_plugin.core.example import transform_input
 
 

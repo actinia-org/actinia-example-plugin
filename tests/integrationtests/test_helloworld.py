@@ -25,6 +25,7 @@ __maintainer__ = "mundialis GmbH & Co. KG"
 
 
 import json
+
 import pytest
 from actinia_api import URL_PREFIX
 from flask import Response

@@ -28,10 +28,10 @@ from flask import make_response, request
 from flask_restful_swagger_2 import Resource, swagger
 
 from actinia_example_plugin.apidocs import project_helloworld
+from actinia_example_plugin.core.example import transform_input
 from actinia_example_plugin.model.response_models import (
     SimpleStatusCodeResponseModel,
 )
-from actinia_example_plugin.core.example import transform_input
 
 
 class ProjectHelloWorld(Resource):

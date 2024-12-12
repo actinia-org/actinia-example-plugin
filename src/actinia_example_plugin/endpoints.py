@@ -30,16 +30,15 @@ from actinia_example_plugin.api.project_helloworld import ProjectHelloWorld
 
 
 def create_project_endpoints(apidoc, projects_url_part="projects") -> None:
-    """
-    Function to add resources with "project" inside the endpoint url.
+    """Function to add resources with "project" inside the endpoint url.
 
     Args:
         apidoc (flask_restful_swagger_2.Api): Flask api
         projects_url_part (str): The name of the projects inside the endpoint
                                  URL; to add deprecated location endpoints set
                                  it to "locations"
-    """
 
+    """
     apidoc.add_resource(
         ProjectHelloWorld,
         "<string:project_name>/helloworld",

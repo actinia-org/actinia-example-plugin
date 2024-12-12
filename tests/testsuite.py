@@ -35,10 +35,11 @@ from actinia_core.core.common.app import flask_app
 from actinia_core.core.common.config import global_config
 from actinia_core.core.common.user import ActiniaUser
 from actinia_core.models.response_models import ProcessingResponseModel
+from werkzeug.datastructures import Headers
 
 
 class ActiniaTestCase(unittest.TestCase):
-    """Actinia test case class"""
+    """Actinia test case class."""
 
     # guest = None
     # admin = None
@@ -143,12 +144,12 @@ class ActiniaTestCase(unittest.TestCase):
         process_num_limit=1000,
         process_time_limit=6000,
     ):
-        """Create actinia user"""
+        """Create actinia user."""
         auth = bytes(f"{name}:{password}", "utf-8")
         # We need to create an HTML basic authorization header
         self.auth_header[role] = Headers()
         self.auth_header[role].add(
-            "Authorization", f"Basic {base64.b64encode(auth).decode()}"
+            "Authorization", f"Basic {base64.b64encode(auth).decode()}",
         )
 
         # Make sure the user database is empty
@@ -172,8 +173,8 @@ class ActiniaTestCase(unittest.TestCase):
         return name, group, self.auth_header[role]
 
 
-def check_started_process(test_case, resp):
-    """Checks response of started process - TODO: can be enhanced"""
+def check_started_process(test_case, resp) -> None:
+    """Checks response of started process - TODO: can be enhanced."""
     if isinstance(resp.json["process_results"], dict):
         resp.json["process_results"] = str(resp.json["process_results"])
     resp_class = ProcessingResponseModel(**resp.json)
@@ -183,6 +184,6 @@ def check_started_process(test_case, resp):
     # poll status_url
     # TODO: status stays in accepted
     status_resp = test_case.app.get(
-        status_url, headers=test_case.user_auth_header
+        status_url, headers=test_case.user_auth_header,
     )
     assert status_resp.json["urls"]["status"] == status_url

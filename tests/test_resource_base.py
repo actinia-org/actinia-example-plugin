@@ -55,9 +55,8 @@ if "ACTINIA_CUSTOM_TEST_CFG" in os.environ:
     CUSTOM_ACTINIA_CFG = str(os.environ["ACTINIA_CUSTOM_TEST_CFG"])
 
 
-def setup_environment():
+def setup_environment() -> None:
     """Setuo test environment."""
-
     global REDIS_PID
     # Set the port to the test redis server
     global_config.REDIS_SERVER_SERVER = "localhost"
@@ -89,7 +88,7 @@ def setup_environment():
         global_config.read(CUSTOM_ACTINIA_CFG)
 
 
-def stop_redis():
+def stop_redis() -> None:
     """Function to stop redis."""
     if SERVER_TEST is False:
         global REDIS_PID
@@ -119,7 +118,7 @@ class ActiniaResourceTestCaseBase(ActiniaTestCaseBase):
         process_time_limit=6000,
         accessible_modules=None,
     ):
-        """Create actinia user"""
+        """Create actinia user."""
         auth = bytes(f"{name}:{password}", "utf-8")
 
         # We need to create an HTML basic authorization header
