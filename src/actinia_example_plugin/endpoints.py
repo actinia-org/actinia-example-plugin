@@ -30,9 +30,9 @@ from actinia_example_plugin.api.project_helloworld import ProjectHelloWorld
 
 
 def create_project_endpoints(
-        apidoc: flask_restful_swagger_2.Api,
-        projects_url_part: str="projects",
-    ) -> None:
+    apidoc: flask_restful_swagger_2.Api,
+    projects_url_part: str = "projects",
+) -> None:
     """Add resources with "project" inside the endpoint url to the api.
 
     Args:
