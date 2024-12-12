@@ -9,8 +9,8 @@ ENV ACTINIA_CUSTOM_TEST_CFG=/etc/default/actinia-example-plugin-test
 ENV DEFAULT_CONFIG_PATH=/etc/default/actinia-example-plugin-test
 
 # install things only for tests
-RUN apk add redis
-RUN pip3 install --no-cache-dir iniconfig==2.0.0 colorlog==6.8.2 pwgen==0.8.2.post0
+RUN apk add --no-cache redis==7.0.15-r1 && \
+    pip3 install --no-cache-dir iniconfig==2.0.0 colorlog==6.8.2 pwgen==0.8.2.post0
 
 # COPY docker/actinia-example-plugin-test/start.sh /src/start.sh
 
@@ -31,7 +31,6 @@ COPY . /src/actinia-example-plugin/
 
 WORKDIR /src/actinia-example-plugin/
 
-RUN chmod a+x tests_with_redis.sh
-RUN make install
+RUN chmod a+x tests_with_redis.sh && make install
 
 # RUN make test

@@ -28,7 +28,6 @@ import base64
 import unittest
 
 import pwgen
-from werkzeug.datastructures import Headers
 
 from actinia_core.core.common import redis_interface
 from actinia_core.core.common.app import flask_app
@@ -149,7 +148,8 @@ class ActiniaTestCase(unittest.TestCase):
         # We need to create an HTML basic authorization header
         self.auth_header[role] = Headers()
         self.auth_header[role].add(
-            "Authorization", f"Basic {base64.b64encode(auth).decode()}",
+            "Authorization",
+            f"Basic {base64.b64encode(auth).decode()}",
         )
 
         # Make sure the user database is empty
@@ -184,6 +184,7 @@ def check_started_process(test_case, resp) -> None:
     # poll status_url
     # TODO: status stays in accepted
     status_resp = test_case.app.get(
-        status_url, headers=test_case.user_auth_header,
+        status_url,
+        headers=test_case.user_auth_header,
     )
     assert status_resp.json["urls"]["status"] == status_url

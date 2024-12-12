@@ -42,16 +42,17 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
         resp = self.app.get(f"{URL_PREFIX}/helloworld")
 
         assert isinstance(
-            resp, Response,
+            resp,
+            Response,
         ), "The response is not of type Response"
         assert resp.status_code == 200, "The status code is not 200"
         assert hasattr(resp, "json"), "The response has no attribute 'json'"
-        assert "message" in resp.json, (
-            "There is no 'message' inside the response"
-        )
-        assert resp.json["message"] == "Hello world!", (
-            "The response message is wrong"
-        )
+        assert (
+            "message" in resp.json
+        ), "There is no 'message' inside the response"
+        assert (
+            resp.json["message"] == "Hello world!"
+        ), "The response message is wrong"
 
     @pytest.mark.integrationtest
     def test_post_helloworld(self) -> None:
@@ -64,16 +65,17 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             content_type="application/json",
         )
         assert isinstance(
-            resp, Response,
+            resp,
+            Response,
         ), "The response is not of type Response"
         assert resp.status_code == 200, "The status code is not 200"
         assert hasattr(resp, "json"), "The response has no attribute 'json'"
-        assert "message" in resp.json, (
-            "There is no 'message' inside the response"
-        )
-        assert resp.json["message"] == "Hello world TEST!", (
-            "The response message is wrong"
-        )
+        assert (
+            "message" in resp.json
+        ), "There is no 'message' inside the response"
+        assert (
+            resp.json["message"] == "Hello world TEST!"
+        ), "The response message is wrong"
 
     @pytest.mark.integrationtest
     def test_post_helloworld_error(self) -> None:
@@ -86,7 +88,8 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             content_type="application/json",
         )
         assert isinstance(
-            resp, Response,
+            resp,
+            Response,
         ), "The response is not of type Response"
         assert resp.status_code == 400, "The status code is not 400"
         assert resp.data == b"Missing name in JSON content"
