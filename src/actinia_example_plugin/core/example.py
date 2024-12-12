@@ -31,5 +31,6 @@ def transform_input(inp: str) -> str:
 
     Returns:
         (str) transformed string
+
     """
     return f"Hello world {inp.upper()}!"
