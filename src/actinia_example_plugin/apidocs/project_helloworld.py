@@ -23,11 +23,10 @@ __copyright__ = "Copyright 2024 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 
-from actinia_example_plugin.model.response_models import (
-    SimpleStatusCodeResponseModel,
-)
+from actinia_example_plugin.model.response_models import \
+    SimpleStatusCodeResponseModel
 
-describeProjectHelloWorld_get_docs = {
+describe_project_hello_world_get_docs = {
     # "summary" is taken from the description of the get method
     "tags": ["example"],
     "description": "Project Hello World example",
@@ -50,7 +49,7 @@ describeProjectHelloWorld_get_docs = {
     },
 }
 
-describeProjectHelloWorld_post_docs = {
+describe_project_hello_world_post_docs = {
     # "summary" is taken from the description of the get method
     "tags": ["example"],
     "description": "Project Hello World example with name",

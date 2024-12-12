@@ -40,12 +40,12 @@ class HelloWorld(Resource):
         """Hello world class initialisation."""
         self.msg = "Hello world!"
 
-    @swagger.doc(helloworld.describeHelloWorld_get_docs)
+    @swagger.doc(helloworld.describe_hello_world_get_docs)
     def get(self) -> SimpleStatusCodeResponseModel:
         """Get 'Hello world!' as answer string."""
         return SimpleStatusCodeResponseModel(status=200, message=self.msg)
 
-    @swagger.doc(helloworld.describeHelloWorld_post_docs)
+    @swagger.doc(helloworld.describe_hello_world_post_docs)
     def post(self) -> SimpleStatusCodeResponseModel:
         """Hello World post method with name from postbody."""
         req_data = request.get_json(force=True)
