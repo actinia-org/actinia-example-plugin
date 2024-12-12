@@ -122,7 +122,8 @@ class ActiniaResourceTestCaseBase(ActiniaTestCaseBase):
         # We need to create an HTML basic authorization header
         cls.auth_header[role] = Headers()
         cls.auth_header[role].add(
-            "Authorization", f"Basic {base64.b64encode(auth).decode()}",
+            "Authorization",
+            f"Basic {base64.b64encode(auth).decode()}",
         )
 
         # Make sure the user database is empty

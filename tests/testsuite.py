@@ -37,6 +37,7 @@ from werkzeug.datastructures import Headers
 
 class ActiniaTestCase(unittest.TestCase):
     """Actinia test case class."""
+
     # guest = None
     # admin = None
     # superadmin = None
