@@ -57,7 +57,7 @@ if "ACTINIA_CUSTOM_TEST_CFG" in os.environ:
 
 
 def setup_environment():
-    """Setuo test environment"""
+    """Setuo test environment."""
 
     global REDIS_PID
     # Set the port to the test redis server
@@ -91,7 +91,7 @@ def setup_environment():
 
 
 def stop_redis():
-    """Function to stop redis"""
+    """Function to stop redis."""
     if SERVER_TEST is False:
         global REDIS_PID
         # Kill th redis server
@@ -106,7 +106,7 @@ setup_environment()
 
 
 class ActiniaResourceTestCaseBase(ActiniaTestCaseBase):
-    """Actinia resource test case base class"""
+    """Actinia resource test case base class."""
 
     @classmethod
     def create_user(
