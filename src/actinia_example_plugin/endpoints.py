@@ -23,13 +23,17 @@ __copyright__ = "Copyright 2022-2024 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 from actinia_core.endpoints import get_endpoint_class_name
+from flask import flask_restful_swagger_2
 
 from actinia_example_plugin.api.helloworld import HelloWorld
 from actinia_example_plugin.api.project_helloworld import ProjectHelloWorld
 
 
-def create_project_endpoints(apidoc, projects_url_part="projects") -> None:
-    """Function to add resources with "project" inside the endpoint url.
+def create_project_endpoints(
+        apidoc: flask_restful_swagger_2.Api,
+        projects_url_part: str="projects",
+    ) -> None:
+    """Add resources with "project" inside the endpoint url to the api.
 
     Args:
         apidoc (flask_restful_swagger_2.Api): Flask api

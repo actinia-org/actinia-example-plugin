@@ -23,6 +23,13 @@ __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 
-def transform_input(inp) -> str:
-    """Example core function."""
+def transform_input(inp: str) -> str:
+    """Return a transformed string as example core function.
+
+    Args:
+        inp (str): Input string to transform
+
+    Returns:
+        (str) transformed string
+    """
     return f"Hello world {inp.upper()}!"
