@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-"""
-Copyright (c) 2018-present mundialis GmbH & Co. KG.
+"""Copyright (c) 2018-present mundialis GmbH & Co. KG.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -28,7 +27,6 @@ import base64
 import unittest
 
 import pwgen
-
 from actinia_core.core.common import redis_interface
 from actinia_core.core.common.app import flask_app
 from actinia_core.core.common.config import global_config
