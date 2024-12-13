@@ -47,7 +47,6 @@ class ActiniaTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
         """Overwrites method setUp from unittest.TestCase class."""
-
         self.app_context = flask_app.app_context()
         self.app_context.push()
         # from http://flask.pocoo.org/docs/0.12/api/#flask.Flask.test_client:
@@ -122,7 +121,6 @@ class ActiniaTestCase(unittest.TestCase):
 
     def tearDown(self) -> None:
         """Overwrites method tearDown from unittest.TestCase class."""
-
         self.app_context.pop()
 
         # remove test user; disconnect redis
