@@ -6,5 +6,5 @@ on: [push, pull_request]
 jobs:
   lint:
     uses: mundialis/github-workflows/.github/workflows/linting.yml@main
-    with:
-      VALIDATE_BASH_EXEC: false
+    # with:
+    #   VALIDATE_BASH_EXEC: false
