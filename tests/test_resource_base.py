@@ -22,6 +22,7 @@ import base64
 import os
 import signal
 import time
+from typing import Optional
 
 from actinia_core.core.common.config import global_config
 from actinia_core.core.common.user import ActiniaUser
@@ -110,10 +111,10 @@ class ActiniaResourceTestCaseBase(ActiniaTestCaseBase):
         role: str = "guest",
         group: str = "group",
         password: str = "abcdefgh",
-        accessible_datasets: dict = None,
+        accessible_datasets: Optional[dict] = None,
         process_num_limit: int = 1000,
         process_time_limit: int = 6000,
-        accessible_modules: list = None,
+        accessible_modules: Optional[list] = None,
     ):
         """Create actinia user."""
         auth = bytes(f"{name}:{password}", "utf-8")

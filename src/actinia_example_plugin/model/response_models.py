@@ -23,8 +23,9 @@ __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 
-from flask_restful_swagger_2 import Schema
 from typing import ClassVar
+
+from flask_restful_swagger_2 import Schema
 
 
 class SimpleStatusCodeResponseModel(Schema):

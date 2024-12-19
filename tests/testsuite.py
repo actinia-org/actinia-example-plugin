@@ -25,14 +25,13 @@ __maintainer__ = "mundialis GmbH & Co. KG"
 
 import base64
 import unittest
+from typing import ClassVar, Optional
 
 import pwgen
 from actinia_core.core.common import redis_interface
 from actinia_core.core.common.app import flask_app
 from actinia_core.core.common.config import global_config
 from actinia_core.core.common.user import ActiniaUser
-from actinia_core.models.response_models import ProcessingResponseModel
-from typing import ClassVar
 from werkzeug.datastructures import Headers
 
 
@@ -135,7 +134,7 @@ class ActiniaTestCase(unittest.TestCase):
         role: str = "guest",
         group: str = "group",
         password: str = "abcdefgh",
-        accessible_datasets: dict = None,
+        accessible_datasets: Optional[dict] = None,
         process_num_limit: int = 1000,
         process_time_limit: int = 6000,
         accessible_modules: list = global_config.MODULE_ALLOW_LIST,
