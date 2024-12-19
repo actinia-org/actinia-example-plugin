@@ -19,7 +19,7 @@ Hello World class
 
 __license__ = "GPLv3"
 __author__ = "Anika Weinmann"
-__copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
+__copyright__ = "Copyright 2024 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 
@@ -27,10 +27,21 @@ from actinia_example_plugin.model.response_models import (
     SimpleStatusCodeResponseModel,
 )
 
-describe_hello_world_get_docs = {
+describe_project_hello_world_get_docs = {
     # "summary" is taken from the description of the get method
     "tags": ["example"],
-    "description": "Hello World example",
+    "description": "Project Hello World example",
+    "parameters": [
+        {
+            "name": "project_name",
+            "description": "The project name that contains the data that "
+            "should be processed",
+            "required": True,
+            "in": "path",
+            "type": "string",
+            "default": "nc_spm_08",
+        },
+    ],
     "responses": {
         "200": {
             "description": "This response returns the string 'Hello World!'",
@@ -39,10 +50,21 @@ describe_hello_world_get_docs = {
     },
 }
 
-describe_hello_world_post_docs = {
+describe_project_hello_world_post_docs = {
     # "summary" is taken from the description of the get method
     "tags": ["example"],
-    "description": "Hello World example with name",
+    "description": "Project Hello World example with name",
+    "parameters": [
+        {
+            "name": "project_name",
+            "description": "The project name that contains the data that "
+            "should be processed",
+            "required": True,
+            "in": "path",
+            "type": "string",
+            "default": "nc_spm_08",
+        },
+    ],
     "responses": {
         "200": {
             "description": "This response returns the string 'Hello World "

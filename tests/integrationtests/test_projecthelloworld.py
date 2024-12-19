@@ -40,8 +40,8 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
 
     @pytest.mark.integrationtest
     def test_get_helloworld(self) -> None:
-        """Test the get method of the /helloworld endpoint."""
-        resp = self.app.get(f"{URL_PREFIX}/helloworld")
+        """Test the get method of the /projects/<project_name> endpoint."""
+        resp = self.app.get(f"{URL_PREFIX}/{self.project_url_part}/project1")
 
         assert isinstance(
             resp,
@@ -55,15 +55,15 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             "message" in resp.json
         ), "There is no 'message' inside the response"
         assert (
-            resp.json["message"] == "Hello world!"
+            resp.json["message"] == "Project: Hello world! project1"
         ), "The response message is wrong"
 
     @pytest.mark.integrationtest
     def test_post_helloworld(self) -> None:
-        """Test the post method of the /helloworld endpoint."""
+        """Test the post method of the /projects/<project_name> endpoint."""
         postbody = {"name": "test"}
         resp = self.app.post(
-            f"{URL_PREFIX}/helloworld",
+            f"{URL_PREFIX}/{self.project_url_part}/project1",
             headers=self.user_auth_header,
             data=json.dumps(postbody),
             content_type="application/json",
@@ -80,15 +80,15 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             "message" in resp.json
         ), "There is no 'message' inside the response"
         assert (
-            resp.json["message"] == "Hello world TEST!"
+            resp.json["message"] == "Hello world TEST! project1"
         ), "The response message is wrong"
 
     @pytest.mark.integrationtest
     def test_post_helloworld_error(self) -> None:
-        """Test the post method of the /helloworld endpoint."""
+        """Test the post method of the /projects/<project_name> endpoint."""
         postbody = {"namee": "test"}
         resp = self.app.post(
-            f"{URL_PREFIX}/helloworld",
+            f"{URL_PREFIX}/{self.project_url_part}/project1",
             headers=self.user_auth_header,
             data=json.dumps(postbody),
             content_type="application/json",
