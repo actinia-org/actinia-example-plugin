@@ -55,7 +55,6 @@ if "ACTINIA_CUSTOM_TEST_CFG" in os.environ:
 
 def setup_environment() -> None:
     """Setuo test environment."""
-    global REDIS_PID
     # Set the port to the test redis server
     global_config.REDIS_SERVER_SERVER = "localhost"
     global_config.REDIS_SERVER_PORT = 7000
