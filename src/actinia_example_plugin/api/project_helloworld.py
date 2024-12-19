@@ -41,13 +41,13 @@ class ProjectHelloWorld(Resource):
         self.msg = "Project: Hello world!"
 
     @swagger.doc(project_helloworld.describe_project_hello_world_get_docs)
-    def get(self, project_name) -> SimpleStatusCodeResponseModel:
+    def get(self, project_name: str) -> SimpleStatusCodeResponseModel:
         """Get 'Hello world!' as answer string."""
         msg = f"{self.msg} {project_name}"
         return SimpleStatusCodeResponseModel(status=200, message=msg)
 
     @swagger.doc(project_helloworld.describe_project_hello_world_post_docs)
-    def post(self, project_name) -> SimpleStatusCodeResponseModel:
+    def post(self, project_name: str) -> SimpleStatusCodeResponseModel:
         """Hello World post method with name from postbody."""
         req_data = request.get_json(force=True)
         if isinstance(req_data, dict) is False or "name" not in req_data:

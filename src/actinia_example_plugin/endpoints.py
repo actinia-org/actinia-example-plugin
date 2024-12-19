@@ -50,7 +50,7 @@ def create_project_endpoints(
 
 
 # endpoints loaded if run as actinia-core plugin as well as standalone app
-def create_endpoints(flask_api) -> None:
+def create_endpoints(flask_api: flask_restful_swagger_2.Api) -> None:
     """Create plugin endpoints."""
     apidoc = flask_api
 

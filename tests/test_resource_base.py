@@ -106,14 +106,14 @@ class ActiniaResourceTestCaseBase(ActiniaTestCaseBase):
     @classmethod
     def create_user(
         cls,
-        name="guest",
-        role="guest",
-        group="group",
-        password="abcdefgh",
-        accessible_datasets=None,
-        process_num_limit=1000,
-        process_time_limit=6000,
-        accessible_modules=None,
+        name: str = "guest",
+        role: str = "guest",
+        group: str = "group",
+        password: str = "abcdefgh",
+        accessible_datasets: dict = None,
+        process_num_limit: int = 1000,
+        process_time_limit: int = 6000,
+        accessible_modules: list = None,
     ):
         """Create actinia user."""
         auth = bytes(f"{name}:{password}", "utf-8")

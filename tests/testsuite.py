@@ -47,7 +47,6 @@ class ActiniaTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
         """Overwrites method setUp from unittest.TestCase class."""
-
         self.app_context = flask_app.app_context()
         self.app_context.push()
         # from http://flask.pocoo.org/docs/0.12/api/#flask.Flask.test_client:
@@ -122,7 +121,6 @@ class ActiniaTestCase(unittest.TestCase):
 
     def tearDown(self) -> None:
         """Overwrites method tearDown from unittest.TestCase class."""
-
         self.app_context.pop()
 
         # remove test user; disconnect redis
@@ -132,14 +130,14 @@ class ActiniaTestCase(unittest.TestCase):
 
     def create_user(
         self,
-        name="guest",
-        role="guest",
-        group="group",
-        password="abcdefgh",
-        accessible_datasets=None,
-        accessible_modules=global_config.MODULE_ALLOW_LIST,
-        process_num_limit=1000,
-        process_time_limit=6000,
+        name: str = "guest",
+        role: str = "guest",
+        group: str = "group",
+        password: str = "abcdefgh",
+        accessible_datasets: dict = None,
+        process_num_limit: int = 1000,
+        process_time_limit: int = 6000,
+        accessible_modules: list = global_config.MODULE_ALLOW_LIST,
     ):
         """Create actinia user."""
         auth = bytes(f"{name}:{password}", "utf-8")
@@ -171,18 +169,18 @@ class ActiniaTestCase(unittest.TestCase):
         return name, group, self.auth_header[role]
 
 
-def check_started_process(test_case, resp) -> None:
-    """Checks response of started process - TODO: can be enhanced."""
-    if isinstance(resp.json["process_results"], dict):
-        resp.json["process_results"] = str(resp.json["process_results"])
-    resp_class = ProcessingResponseModel(**resp.json)
-    assert resp_class["status"] == "accepted"
-    status_url = resp_class["urls"]["status"]
+# def check_started_process(test_case: , resp: ) -> None:
+#     """Checks response of started process - TODO: can be enhanced."""
+#     if isinstance(resp.json["process_results"], dict):
+#         resp.json["process_results"] = str(resp.json["process_results"])
+#     resp_class = ProcessingResponseModel(**resp.json)
+#     assert resp_class["status"] == "accepted"
+#     status_url = resp_class["urls"]["status"]
 
-    # poll status_url
-    # TODO: status stays in accepted
-    status_resp = test_case.app.get(
-        status_url,
-        headers=test_case.user_auth_header,
-    )
-    assert status_resp.json["urls"]["status"] == status_url
+#     # poll status_url
+#     # TODO: status stays in accepted
+#     status_resp = test_case.app.get(
+#         status_url,
+#         headers=test_case.user_auth_header,
+#     )
+#     assert status_resp.json["urls"]["status"] == status_url
