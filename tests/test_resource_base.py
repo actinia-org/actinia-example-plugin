@@ -21,7 +21,9 @@ import atexit
 import base64
 import os
 import signal
+import tempfile
 import time
+from pathlib import Path
 from typing import Optional
 
 from actinia_core.core.common.config import global_config
@@ -40,7 +42,7 @@ __maintainer__ = "mundialis GmbH & Co. KG"
 # Create endpoints
 create_endpoints()
 
-REDIS_PID = None
+redis_pid = None
 SERVER_TEST = False
 CUSTOM_ACTINIA_CFG = False
 
@@ -55,6 +57,7 @@ if "ACTINIA_CUSTOM_TEST_CFG" in os.environ:
 
 def setup_environment() -> None:
     """Setuo test environment."""
+    global redis_pid
     # Set the port to the test redis server
     global_config.REDIS_SERVER_SERVER = "localhost"
     global_config.REDIS_SERVER_PORT = 7000
@@ -69,11 +72,12 @@ def setup_environment() -> None:
     global_config.GRASS_GIS_START_SCRIPT = "/usr/local/bin/grass"
     # global_config.GRASS_DATABASE= "/usr/local/grass_test_db"
     # global_config.GRASS_DATABASE = "%s/actinia/grass_test_db" % home
-    global_config.GRASS_TMP_DATABASE = "/tmp"
+    global_config.GRASS_TMP_DATABASE = tempfile.TemporaryDirectory().name
+    Path(global_config.GRASS_TMP_DATABASE).mkdir(parents=True)
 
     if SERVER_TEST is False and CUSTOM_ACTINIA_CFG is False:
         # Start the redis server for user and logging management
-        REDIS_PID = os.spawnl(
+        redis_pid = os.spawnl(
             os.P_NOWAIT,
             "/usr/bin/redis-server",
             "common/redis.conf",
@@ -88,10 +92,10 @@ def setup_environment() -> None:
 def stop_redis() -> None:
     """Function to stop redis."""
     if SERVER_TEST is False:
-        global REDIS_PID
+        global redis_pid
         # Kill th redis server
-        if REDIS_PID is not None:
-            os.kill(REDIS_PID, signal.SIGTERM)
+        if redis_pid is not None:
+            os.kill(redis_pid, signal.SIGTERM)
 
 
 # Register the redis stop function
