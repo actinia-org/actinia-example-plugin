@@ -43,7 +43,7 @@ __maintainer__ = "mundialis GmbH & Co. KG"
 # Create endpoints
 create_endpoints()
 
-redis_pid = None
+REDIS_PID = None
 SERVER_TEST = False
 CUSTOM_ACTINIA_CFG = False
 
@@ -58,7 +58,7 @@ if "ACTINIA_CUSTOM_TEST_CFG" in os.environ:
 
 def setup_environment() -> None:
     """Setuo test environment."""
-    global redis_pid
+    global REDIS_PID
     # Set the port to the test redis server
     global_config.REDIS_SERVER_SERVER = "localhost"
     global_config.REDIS_SERVER_PORT = 7000
@@ -78,7 +78,7 @@ def setup_environment() -> None:
 
     if SERVER_TEST is False and CUSTOM_ACTINIA_CFG is False:
         # Start the redis server for user and logging management
-        redis_pid = os.spawnl(
+        REDIS_PID = os.spawnl(
             os.P_NOWAIT,
             "/usr/bin/redis-server",
             "common/redis.conf",
@@ -93,8 +93,8 @@ def setup_environment() -> None:
 def stop_redis() -> None:
     """Stop redis server."""
     # Kill th redis server
-    if SERVER_TEST is False and redis_pid is not None:
-        os.kill(redis_pid, signal.SIGTERM)
+    if SERVER_TEST is False and REDIS_PID is not None:
+        os.kill(REDIS_PID, signal.SIGTERM)
 
 
 # Register the redis stop function
