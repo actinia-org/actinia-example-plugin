@@ -45,12 +45,6 @@ API_Docs = "https://redocly.github.io/redoc/?url=https://actinia.mundialis.de/la
 [tool.flake8]
 max-line-length = 79
 
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.setuptools.package-data]
-"*" = ["*.*"]
-
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "--cov actinia_module_plugin --cov-report term-missing --verbose --tb=line -x -s"
