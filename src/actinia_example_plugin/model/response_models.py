@@ -24,13 +24,14 @@ __maintainer__ = "mundialis GmbH & Co. KG"
 
 
 from flask_restful_swagger_2 import Schema
+from typing import ClassVar
 
 
 class SimpleStatusCodeResponseModel(Schema):
     """Simple response schema to inform about status."""
 
-    type = "object"
-    properties = {
+    type: str = "object"
+    properties: ClassVar[dict] = {
         "status": {
             "type": "number",
             "description": "The status code of the request.",
@@ -40,7 +41,7 @@ class SimpleStatusCodeResponseModel(Schema):
             "description": "A short message to describes the status",
         },
     }
-    required = ["status", "message"]
+    required: ClassVar[list[str]] = ["status", "message"]
 
 
 simpleResponseExample = SimpleStatusCodeResponseModel(

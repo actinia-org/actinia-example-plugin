@@ -32,6 +32,7 @@ from actinia_core.core.common.app import flask_app
 from actinia_core.core.common.config import global_config
 from actinia_core.core.common.user import ActiniaUser
 from actinia_core.models.response_models import ProcessingResponseModel
+from typing import ClassVar
 from werkzeug.datastructures import Headers
 
 
@@ -41,9 +42,9 @@ class ActiniaTestCase(unittest.TestCase):
     # guest = None
     # admin = None
     # superadmin = None
-    user = None
-    auth_header = {}
-    users_list = []
+    user: str = None
+    auth_header: ClassVar[dict] = {}
+    users_list: ClassVar[list[str]] = []
 
     def setUp(self) -> None:
         """Overwrites method setUp from unittest.TestCase class."""
