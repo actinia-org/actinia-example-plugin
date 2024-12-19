@@ -45,8 +45,8 @@ class SimpleStatusCodeResponseModel(Schema):
     required: ClassVar[list[str]] = ["status", "message"]
 
 
-simpleResponseExample = SimpleStatusCodeResponseModel(
+simple_response_example = SimpleStatusCodeResponseModel(
     status=200,
     message="success",
 )
-SimpleStatusCodeResponseModel.example = simpleResponseExample
+SimpleStatusCodeResponseModel.example = simple_response_example
