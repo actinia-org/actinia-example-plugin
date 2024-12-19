@@ -33,6 +33,7 @@ from actinia_core.core.common import redis_interface
 from actinia_core.core.common.app import flask_app
 from actinia_core.core.common.config import global_config
 from actinia_core.core.common.user import ActiniaUser
+from actinia_core.version import init_versions
 from werkzeug.datastructures import Headers
 
 
@@ -45,6 +46,18 @@ class ActiniaTestCase(unittest.TestCase):
     user: str = None
     auth_header: ClassVar[dict] = {}
     users_list: ClassVar[list[str]] = []
+    project_url_part: str = "projects"
+
+    # set project_url_part to "locations" if GRASS GIS version < 8.4
+    init_versions()
+    from actinia_core.version import G_VERSION
+
+    grass_version_s: str = G_VERSION["version"]
+    grass_version: ClassVar[list[int]] = [
+        int(item) for item in grass_version_s.split(".")[:2]
+    ]
+    if grass_version < [8, 4]:
+        project_url_part = "locations"
 
     def setUp(self) -> None:
         """Overwrite method setUp from unittest.TestCase class."""

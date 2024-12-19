@@ -1,1 +1,4 @@
 lint.ignore = ["PLR0913", "PLR0917", "PLW0603", "S107", "S606"]
+
+[lint.per-file-ignores]
+"tests/testsuite.py" = [ "PLC0415",]

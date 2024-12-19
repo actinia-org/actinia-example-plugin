@@ -44,7 +44,7 @@ def create_project_endpoints(
     """
     apidoc.add_resource(
         ProjectHelloWorld,
-        "<string:project_name>/helloworld",
+        f"{projects_url_part}/<string:project_name>",
         endpoint=get_endpoint_class_name(ProjectHelloWorld, projects_url_part),
     )
 
