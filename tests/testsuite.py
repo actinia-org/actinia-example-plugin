@@ -17,15 +17,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Base class for GRASS GIS REST API tests
 """
 
+from __future__ import annotations
+
 __license__ = "GPLv3"
 __author__ = "Carmen Tawalika, Sören Gebbert"
 __copyright__ = "Copyright 2018-2022 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
-
 import base64
 import unittest
-from typing import ClassVar, Optional
+from typing import ClassVar
 
 import pwgen
 from actinia_core.core.common import redis_interface
@@ -46,7 +47,7 @@ class ActiniaTestCase(unittest.TestCase):
     users_list: ClassVar[list[str]] = []
 
     def setUp(self) -> None:
-        """Overwrites method setUp from unittest.TestCase class."""
+        """Overwrite method setUp from unittest.TestCase class."""
         self.app_context = flask_app.app_context()
         self.app_context.push()
         # from http://flask.pocoo.org/docs/0.12/api/#flask.Flask.test_client:
@@ -120,7 +121,7 @@ class ActiniaTestCase(unittest.TestCase):
         # create_process_queue(config=global_config)
 
     def tearDown(self) -> None:
-        """Overwrites method tearDown from unittest.TestCase class."""
+        """Overwrite method tearDown from unittest.TestCase class."""
         self.app_context.pop()
 
         # remove test user; disconnect redis
@@ -134,11 +135,11 @@ class ActiniaTestCase(unittest.TestCase):
         role: str = "guest",
         group: str = "group",
         password: str = "abcdefgh",
-        accessible_datasets: Optional[dict] = None,
+        accessible_datasets: dict[str, list | None] | None = None,
         process_num_limit: int = 1000,
         process_time_limit: int = 6000,
-        accessible_modules: list = global_config.MODULE_ALLOW_LIST,
-    ):
+        accessible_modules: list[str] = global_config.MODULE_ALLOW_LIST,
+    ) -> (str, str, Headers()):
         """Create actinia user."""
         auth = bytes(f"{name}:{password}", "utf-8")
         # We need to create an HTML basic authorization header

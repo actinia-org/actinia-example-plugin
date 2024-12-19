@@ -17,6 +17,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Tests: Actinia resource test case base
 """
 
+from __future__ import annotations
+
 import atexit
 import base64
 import os
@@ -24,7 +26,6 @@ import signal
 import tempfile
 import time
 from pathlib import Path
-from typing import Optional
 
 from actinia_core.core.common.config import global_config
 from actinia_core.core.common.user import ActiniaUser
@@ -90,12 +91,10 @@ def setup_environment() -> None:
 
 
 def stop_redis() -> None:
-    """Function to stop redis."""
-    if SERVER_TEST is False:
-        global redis_pid
-        # Kill th redis server
-        if redis_pid is not None:
-            os.kill(redis_pid, signal.SIGTERM)
+    """Stop redis server."""
+    # Kill th redis server
+    if SERVER_TEST is False and redis_pid is not None:
+        os.kill(redis_pid, signal.SIGTERM)
 
 
 # Register the redis stop function
@@ -114,11 +113,11 @@ class ActiniaResourceTestCaseBase(ActiniaTestCaseBase):
         role: str = "guest",
         group: str = "group",
         password: str = "abcdefgh",
-        accessible_datasets: Optional[dict] = None,
+        accessible_datasets: dict[str, list | None] | None = None,
         process_num_limit: int = 1000,
         process_time_limit: int = 6000,
-        accessible_modules: Optional[list] = None,
-    ):
+        accessible_modules: list[str] | None = None,
+    ) -> (str, str, Headers()):
         """Create actinia user."""
         auth = bytes(f"{name}:{password}", "utf-8")
 
