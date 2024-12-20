@@ -23,20 +23,20 @@ __copyright__ = "Copyright 2022-2024 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 from actinia_core.endpoints import get_endpoint_class_name
-from flask import flask_restful_swagger_2
+from flask_restful_swagger_2 import Api
 
 from actinia_example_plugin.api.helloworld import HelloWorld
 from actinia_example_plugin.api.project_helloworld import ProjectHelloWorld
 
 
 def create_project_endpoints(
-    apidoc: flask_restful_swagger_2.Api,
+    apidoc: Api,
     projects_url_part: str = "projects",
 ) -> None:
     """Add resources with "project" inside the endpoint url to the api.
 
     Args:
-        apidoc (flask_restful_swagger_2.Api): Flask api
+        apidoc (Api): Flask api
         projects_url_part (str): The name of the projects inside the endpoint
                                  URL; to add deprecated location endpoints set
                                  it to "locations"
@@ -44,13 +44,13 @@ def create_project_endpoints(
     """
     apidoc.add_resource(
         ProjectHelloWorld,
-        f"{projects_url_part}/<string:project_name>",
+        f"/{projects_url_part}/<string:project_name>",
         endpoint=get_endpoint_class_name(ProjectHelloWorld, projects_url_part),
     )
 
 
 # endpoints loaded if run as actinia-core plugin as well as standalone app
-def create_endpoints(flask_api: flask_restful_swagger_2.Api) -> None:
+def create_endpoints(flask_api: Api) -> None:
     """Create plugin endpoints."""
     apidoc = flask_api
 
