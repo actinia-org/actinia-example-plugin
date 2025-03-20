@@ -7,17 +7,17 @@ You can run actinia-example-plugin as an actinia-core plugin.
 ## Installation
 Use docker-compose for installation:
 ```bash
-docker-compose -f docker/docker-compose.yml build
-docker-compose -f docker/docker-compose.yml up -d
+docker compose -f docker/docker-compose.yml build
+docker compose -f docker/docker-compose.yml up -d
 ```
 
 ### Installation hints
 * If you get an error like: `ERROR: for docker_redis_1  Cannot start service redis: network xxx not found` you can try the following:
 ```bash
-docker-compose -f docker/docker-compose.yml down
+docker compose -f docker/docker-compose.yml down
 # remove all custom networks not used by a container
 docker network prune
-docker-compose -f docker/docker-compose.yml up -d
+docker compose -f docker/docker-compose.yml up -d
 ```
 
 ### Requesting helloworld endpoint
@@ -31,13 +31,14 @@ curl -u actinia-gdi:actinia-gdi -H 'accept: application/json' -H 'Content-Type: 
 ## DEV setup
 For a DEV setup you can use the docker/docker-compose.yml:
 ```bash
-docker-compose -f docker/docker-compose.yml build
-docker-compose -f docker/docker-compose.yml run --rm --service-ports --entrypoint sh actinia
+docker compose -f docker/docker-compose.yml build
+docker compose -f docker/docker-compose.yml run --rm --service-ports --entrypoint sh actinia
 
 # install the plugin
 (cd /src/actinia-example-plugin && python3 setup.py install)
 # start actinia-core with your plugin
-gunicorn -b 0.0.0.0:8088 -w 1 --access-logfile=- -k gthread actinia_core.main:flask_app
+sh /src/start.sh
+# gunicorn -b 0.0.0.0:8088 -w 1 --access-logfile=- -k gthread actinia_core.main:flask_app
 ```
 
 ### Hints

@@ -16,6 +16,6 @@ RUN pip3 install --no-cache-dir -r /src/actinia-example-plugin/requirements.txt 
 ENV SETUPTOOLS_SCM_PRETEND_VERSION=0.0
 
 WORKDIR /src/actinia-example-plugin
-RUN python3 setup.py install
+RUN pip3 install -e .
 
 WORKDIR /src/actinia_core
