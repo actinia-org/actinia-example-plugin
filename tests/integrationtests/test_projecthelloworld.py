@@ -82,7 +82,8 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             "message" in resp.json
         ), "There is no 'message' inside the response"
         assert (
-            resp.json["message"] == "Hello world TEST! project1"
+            resp.json["message"] == ("Project: Hello world!"
+                                     " Hello world TEST! project1")
         ), "The response message is wrong"
 
     @pytest.mark.integrationtest
