@@ -44,7 +44,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
         /helloworld/projects/<project_name> endpoint.
         """
         resp = self.app.get(
-            f"{URL_PREFIX}/helloworld/{self.project_url_part}/project1"
+            f"{URL_PREFIX}/helloworld/{self.project_url_part}/project1",
         )
 
         assert isinstance(
