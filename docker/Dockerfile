@@ -1,4 +1,4 @@
-FROM mundialis/actinia-core:5.0.0
+FROM mundialis/actinia:latest
 
 # pwgen is needed for the tests
 RUN pip3 install --no-cache-dir pwgen==0.8.2.post0
