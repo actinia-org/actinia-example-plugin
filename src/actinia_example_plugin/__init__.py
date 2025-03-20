@@ -27,8 +27,8 @@ from pkg_resources import DistributionNotFound, get_distribution
 
 try:
     # Change here if project is renamed and does not equal the package name
-    dist_name = __name__
-    __version__ = get_distribution(dist_name).version
+    DIST_NAME = __name__
+    __version__ = get_distribution(DIST_NAME).version
 except DistributionNotFound:
     __version__ = "unknown"
 finally:
