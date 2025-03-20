@@ -1,4 +1,4 @@
-FROM mundialis/actinia-core:5.0.0 AS actinia_test
+FROM mundialis/actinia:latest AS actinia_test
 
 LABEL authors="Carmen Tawalika,Anika Weinmann"
 LABEL maintainer="tawalika@mundialis.de,weinmann@mundialis.de"
