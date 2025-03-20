@@ -40,8 +40,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
 
     @pytest.mark.integrationtest
     def test_get_helloworld(self) -> None:
-        """
-        Test the get method of the
+        """Test the get method of the
         /helloworld/projects/<project_name> endpoint.
         """
         resp = self.app.get(
