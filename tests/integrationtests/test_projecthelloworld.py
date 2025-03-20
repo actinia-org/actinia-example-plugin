@@ -40,8 +40,13 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
 
     @pytest.mark.integrationtest
     def test_get_helloworld(self) -> None:
-        """Test the get method of the /helloworld/projects/<project_name> endpoint."""
-        resp = self.app.get(f"{URL_PREFIX}/helloworld/{self.project_url_part}/project1")
+        """
+        Test the get method of the
+        /helloworld/projects/<project_name> endpoint.
+        """
+        resp = self.app.get(
+            f"{URL_PREFIX}/helloworld/{self.project_url_part}/project1"
+        )
 
         assert isinstance(
             resp,
@@ -60,7 +65,10 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
 
     @pytest.mark.integrationtest
     def test_post_helloworld(self) -> None:
-        """Test the post method of the /helloworld/projects/<project_name> endpoint."""
+        """
+        Test the post method of the
+        /helloworld/projects/<project_name> endpoint.
+        """
         postbody = {"name": "test"}
         resp = self.app.post(
             f"{URL_PREFIX}/helloworld/{self.project_url_part}/project1",
@@ -85,7 +93,10 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
 
     @pytest.mark.integrationtest
     def test_post_helloworld_error(self) -> None:
-        """Test the post method of the /helloworld/projects/<project_name> endpoint."""
+        """
+        Test the post method of the
+        /helloworld/projects/<project_name> endpoint.
+        """
         postbody = {"namee": "test"}
         resp = self.app.post(
             f"{URL_PREFIX}/helloworld/{self.project_url_part}/project1",
