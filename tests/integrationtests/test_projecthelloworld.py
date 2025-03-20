@@ -91,8 +91,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
 
     @pytest.mark.integrationtest
     def test_post_helloworld_error(self) -> None:
-        """
-        Test the post method of the
+        """Test the post method of the
         /helloworld/projects/<project_name> endpoint.
         """
         postbody = {"namee": "test"}
