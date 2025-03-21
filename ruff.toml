@@ -2,3 +2,5 @@ lint.ignore = ["PLR0913", "PLR0917", "PLW0603", "S107", "S606"]
 
 [lint.per-file-ignores]
 "tests/testsuite.py" = [ "PLC0415",]
+"tests/integrationtests/test_helloworld.py" = [ "PLR2004",]
+"tests/integrationtests/test_projecthelloworld.py" = [ "PLR2004",]
