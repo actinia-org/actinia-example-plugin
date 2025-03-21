@@ -16,6 +16,6 @@ RUN pip3 install --no-cache-dir -r /src/actinia-example-plugin/requirements.txt 
 ENV SETUPTOOLS_SCM_PRETEND_VERSION=0.0
 
 WORKDIR /src/actinia-example-plugin
-RUN pip3 install -e .
+RUN pip3 install --no-cache-dir -e .
 
 WORKDIR /src/actinia_core
