@@ -119,7 +119,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
 
     @pytest.mark.integrationtest
     def test_projects_endpoint_for_lt_g84(self) -> None:
-        """Test non-supported project endpoint for GRASS versions < g84"""
+        """Test non-supported project endpoint for GRASS versions < g84."""
         if self.grass_version < [8, 4]:
             resp = self.app.get(
                 f"{URL_PREFIX}/helloworld/projects/project1",

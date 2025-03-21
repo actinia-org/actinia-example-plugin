@@ -29,5 +29,5 @@ try:
     # Change here if project is renamed and does not equal the package name
     DIST_NAME = __name__
     __version__ = importlib.metadata.version(DIST_NAME)
-except Exception:
+except Exception():
     __version__ = "unknown"

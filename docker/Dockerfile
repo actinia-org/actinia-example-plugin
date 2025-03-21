@@ -1,3 +1,6 @@
+# Exception for hadolint-docker-linter:
+# DL3007: using latest is prone to errors if the image will ever update. Pin the version explicitly to a release tag
+# hadolint ignore=DL3007
 FROM mundialis/actinia:latest
 
 # pwgen is needed for the tests
@@ -16,6 +19,6 @@ RUN pip3 install --no-cache-dir -r /src/actinia-example-plugin/requirements.txt 
 ENV SETUPTOOLS_SCM_PRETEND_VERSION=0.0
 
 WORKDIR /src/actinia-example-plugin
-RUN pip3 install -e .
+RUN pip3 install --no-cache-dir -e .
 
 WORKDIR /src/actinia_core
