@@ -31,10 +31,6 @@ from flask import Response
 
 from tests.testsuite import ActiniaTestCase
 
-STATUS_CODE_200 = 200
-STATUS_CODE_400 = 400
-STATUS_CODE_404 = 404
-
 
 class ActiniaHelloWorldTest(ActiniaTestCase):
     """Actinia hello world test class for hello world endpoint."""
@@ -50,9 +46,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             resp,
             Response,
         ), "The response is not of type Response"
-        assert (
-            resp.status_code == STATUS_CODE_200
-        ), f"The status code is not {STATUS_CODE_200}"
+        assert resp.status_code == 200, "The status code is not 200"
         assert hasattr(resp, "json"), "The response has no attribute 'json'"
         assert (
             "message" in resp.json
@@ -75,9 +69,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             resp,
             Response,
         ), "The response is not of type Response"
-        assert (
-            resp.status_code == STATUS_CODE_200
-        ), f"The status code is not {STATUS_CODE_200}"
+        assert resp.status_code == 200, "The status code is not 200"
         assert hasattr(resp, "json"), "The response has no attribute 'json'"
         assert (
             "message" in resp.json
@@ -100,9 +92,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             resp,
             Response,
         ), "The response is not of type Response"
-        assert (
-            resp.status_code == STATUS_CODE_400
-        ), f"The status code is not {STATUS_CODE_400}"
+        assert resp.status_code == 400, "The status code is not 400"
         assert resp.data == b"Missing name in JSON content"
 
     @pytest.mark.integrationtest
@@ -116,10 +106,10 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
                 resp,
                 Response,
             ), "The response is not of type Response"
-            assert (
-                resp.status_code == STATUS_CODE_200
-            ), f"The status code is not {STATUS_CODE_200}"
-            resp_location = resp.location.replace("http://localhost", "")
+            # self.app.get is following redirects
+            assert resp.status_code == 200, "The status code is not 200"
+            # remove beginning of URL e.g. http://localhost or http://127.0.0.1
+            resp_location = "/" + "/".join(resp.location.split("/")[3:])
             assert (
                 resp_location == f"{URL_PREFIX}/helloworld/projects/project1"
             ), (
@@ -138,9 +128,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
                 resp,
                 Response,
             ), "The response is not of type Response"
-            assert (
-                resp.status_code == STATUS_CODE_404
-            ), f"The status code is not {STATUS_CODE_404}"
+            assert resp.status_code == 404, "The status code is not 404"
             assert resp.json["message"] == (
                 "Not Found. The requested URL "
                 "is only available from "
