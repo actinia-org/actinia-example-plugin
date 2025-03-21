@@ -1,3 +1,6 @@
+# Exception for hadoling-docker-linter:
+# DL3007: using latest is prone to errors if the image will ever update. Pin the version explicitly to a release tag
+# hadolint ignore=DL3007
 FROM mundialis/actinia:latest AS actinia_test
 
 LABEL authors="Carmen Tawalika,Anika Weinmann"
