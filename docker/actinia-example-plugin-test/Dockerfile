@@ -1,4 +1,7 @@
-FROM mundialis/actinia-core:5.0.0 as actinia_test
+# Exception for hadolint-docker-linter:
+# DL3007: using latest is prone to errors if the image will ever update. Pin the version explicitly to a release tag
+# hadolint ignore=DL3007
+FROM mundialis/actinia:latest AS actinia_test
 
 LABEL authors="Carmen Tawalika,Anika Weinmann"
 LABEL maintainer="tawalika@mundialis.de,weinmann@mundialis.de"
@@ -9,8 +12,8 @@ ENV ACTINIA_CUSTOM_TEST_CFG=/etc/default/actinia-example-plugin-test
 ENV DEFAULT_CONFIG_PATH=/etc/default/actinia-example-plugin-test
 
 # install things only for tests
-RUN apk add --no-cache redis==7.0.15-r1 && \
-    pip3 install --no-cache-dir iniconfig==2.0.0 colorlog==6.8.2 pwgen==0.8.2.post0
+RUN apk add --no-cache redis==7.2.7-r0 && \
+    pip3 install --no-cache-dir iniconfig==2.0.0 colorlog==6.8.2 pwgen==0.8.2.post0 pytest==8.3.5 pytest-cov==6.0.0
 
 # COPY docker/actinia-example-plugin-test/start.sh /src/start.sh
 
@@ -30,6 +33,7 @@ COPY docker/actinia-example-plugin-test/actinia-example-plugin-test.cfg /etc/def
 COPY . /src/actinia-example-plugin/
 
 WORKDIR /src/actinia-example-plugin/
+RUN pip3 install --no-cache-dir -e .
 
 RUN chmod a+x tests_with_redis.sh && make install
 

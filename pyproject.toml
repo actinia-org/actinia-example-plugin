@@ -47,7 +47,7 @@ max-line-length = 79
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--cov actinia_module_plugin --cov-report term-missing --verbose --tb=line -x -s"
+addopts = "--cov actinia_example_plugin --cov-report term-missing --verbose --tb=line -x -s"
 testpaths = [
     "tests",
 ]

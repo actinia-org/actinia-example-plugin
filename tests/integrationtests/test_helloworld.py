@@ -31,9 +31,6 @@ from flask import Response
 
 from tests.testsuite import ActiniaTestCase
 
-STATUS_CODE_200 = 200
-STATUS_CODE_400 = 400
-
 
 class ActiniaHelloWorldTest(ActiniaTestCase):
     """Actinia hello world test class for hello world endpoint."""
@@ -47,9 +44,7 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             resp,
             Response,
         ), "The response is not of type Response"
-        assert (
-            resp.status_code == STATUS_CODE_200
-        ), f"The status code is not {STATUS_CODE_200}"
+        assert resp.status_code == 200, "The status code is not 200"
         assert hasattr(resp, "json"), "The response has no attribute 'json'"
         assert (
             "message" in resp.json
@@ -72,15 +67,13 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             resp,
             Response,
         ), "The response is not of type Response"
-        assert (
-            resp.status_code == STATUS_CODE_200
-        ), f"The status code is not {STATUS_CODE_200}"
+        assert resp.status_code == 200, "The status code is not 200"
         assert hasattr(resp, "json"), "The response has no attribute 'json'"
         assert (
             "message" in resp.json
         ), "There is no 'message' inside the response"
         assert (
-            resp.json["message"] == "Hello world TEST!"
+            resp.json["message"] == "Hello world! Hello world TEST!"
         ), "The response message is wrong"
 
     @pytest.mark.integrationtest
@@ -97,7 +90,5 @@ class ActiniaHelloWorldTest(ActiniaTestCase):
             resp,
             Response,
         ), "The response is not of type Response"
-        assert (
-            resp.status_code == STATUS_CODE_400
-        ), f"The status code is not {STATUS_CODE_400}"
+        assert resp.status_code == 400, "The status code is not 400"
         assert resp.data == b"Missing name in JSON content"

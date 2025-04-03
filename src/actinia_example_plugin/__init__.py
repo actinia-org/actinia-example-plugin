@@ -23,13 +23,11 @@ __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 
-from pkg_resources import DistributionNotFound, get_distribution
+import importlib.metadata
 
 try:
     # Change here if project is renamed and does not equal the package name
-    dist_name = __name__
-    __version__ = get_distribution(dist_name).version
-except DistributionNotFound:
+    DIST_NAME = __name__
+    __version__ = importlib.metadata.version(DIST_NAME)
+except Exception():
     __version__ = "unknown"
-finally:
-    del get_distribution, DistributionNotFound

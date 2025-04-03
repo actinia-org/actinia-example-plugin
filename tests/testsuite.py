@@ -33,7 +33,7 @@ from actinia_core.core.common import redis_interface
 from actinia_core.core.common.app import flask_app
 from actinia_core.core.common.config import global_config
 from actinia_core.core.common.user import ActiniaUser
-from actinia_core.version import init_versions
+from actinia_core.version import G_VERSION, init_versions
 from werkzeug.datastructures import Headers
 
 
@@ -50,7 +50,6 @@ class ActiniaTestCase(unittest.TestCase):
 
     # set project_url_part to "locations" if GRASS GIS version < 8.4
     init_versions()
-    from actinia_core.version import G_VERSION
 
     grass_version_s: str = G_VERSION["version"]
     grass_version: ClassVar[list[int]] = [
