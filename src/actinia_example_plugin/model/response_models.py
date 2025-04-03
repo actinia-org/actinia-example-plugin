@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-Copyright (c) 2018-present mundialis GmbH & Co. KG
+"""Copyright (c) 2018-2024 mundialis GmbH & Co. KG.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,8 +20,10 @@ Response models
 __license__ = "GPLv3"
 __author__ = "Anika Weinmann"
 __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
-__maintainer__ = "mundialis GmbH % Co. KG"
+__maintainer__ = "mundialis GmbH & Co. KG"
 
+
+from typing import ClassVar
 
 from flask_restful_swagger_2 import Schema
 
@@ -31,8 +31,8 @@ from flask_restful_swagger_2 import Schema
 class SimpleStatusCodeResponseModel(Schema):
     """Simple response schema to inform about status."""
 
-    type = "object"
-    properties = {
+    type: str = "object"
+    properties: ClassVar[dict] = {
         "status": {
             "type": "number",
             "description": "The status code of the request.",
@@ -42,10 +42,11 @@ class SimpleStatusCodeResponseModel(Schema):
             "description": "A short message to describes the status",
         },
     }
-    required = ["status", "message"]
+    required: ClassVar[list[str]] = ["status", "message"]
 
 
-simpleResponseExample = SimpleStatusCodeResponseModel(
-    status=200, message="success"
+simple_response_example = SimpleStatusCodeResponseModel(
+    status=200,
+    message="success",
 )
-SimpleStatusCodeResponseModel.example = simpleResponseExample
+SimpleStatusCodeResponseModel.example = simple_response_example

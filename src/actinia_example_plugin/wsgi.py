@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-Copyright (c) 2018-present mundialis GmbH & Co. KG
+"""Copyright (c) 2018-2024 mundialis GmbH & Co. KG.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -20,6 +18,4 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 __license__ = "GPLv3"
 __author__ = "Carmen Tawalika, Anika Weinmann"
 __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
-__maintainer__ = "mundialis GmbH % Co. KG"
-
-from actinia_example_plugin.main import app as application
+__maintainer__ = "mundialis GmbH & Co. KG"

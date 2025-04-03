@@ -42,3 +42,9 @@ sdist/*
 # docker
 docker/redis_data/dump.rdb
 !docker/actinia-example-plugin-test/actinia-example-plugin-test.cfg
+
+# linting with shared config file
+.pylintrc
+.pylintrc_allowed_to_fail
+ruff-github-workflows.toml
+ruff-merged.toml

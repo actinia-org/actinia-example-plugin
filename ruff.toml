@@ -1,0 +1,15 @@
+# PLR0913 too-many-arguments (of function definition)
+# PLR0917 too-many-positional-arguments (of function definition)
+# PLW0603 (checks for use of) global-statement
+# S107 hardcoded-password-default
+# S606 start-process-with-no-shell
+# FA102 future-required-type-annotation
+# PLC0415 import-outside-top-level
+# PLR2004 magic-value-comparison (unnamed numerical constants ("magic") values)
+
+lint.ignore = ["PLR0913", "PLR0917", "PLW0603", "S107", "S606", "FA102"]
+
+[lint.per-file-ignores]
+"tests/testsuite.py" = [ "PLC0415",]
+"tests/integrationtests/test_helloworld.py" = [ "PLR2004",]
+"tests/integrationtests/test_projecthelloworld.py" = [ "PLR2004",]

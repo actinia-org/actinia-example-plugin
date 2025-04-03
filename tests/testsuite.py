@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-Copyright (c) 2018-present mundialis GmbH & Co. KG
+"""Copyright (c) 2018-2025 mundialis GmbH & Co. KG.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,36 +17,49 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Base class for GRASS GIS REST API tests
 """
 
+from __future__ import annotations
+
 __license__ = "GPLv3"
 __author__ = "Carmen Tawalika, Sören Gebbert"
 __copyright__ = "Copyright 2018-2022 mundialis GmbH & Co. KG"
-__maintainer__ = "mundialis GmbH % Co. KG"
-
+__maintainer__ = "mundialis GmbH & Co. KG"
 
 import base64
 import unittest
+from typing import ClassVar
 
 import pwgen
-from werkzeug.datastructures import Headers
-
 from actinia_core.core.common import redis_interface
 from actinia_core.core.common.app import flask_app
 from actinia_core.core.common.config import global_config
 from actinia_core.core.common.user import ActiniaUser
-from actinia_core.models.response_models import ProcessingResponseModel
+from actinia_core.version import G_VERSION, init_versions
+from werkzeug.datastructures import Headers
 
 
 class ActiniaTestCase(unittest.TestCase):
+    """Actinia test case class."""
+
     # guest = None
     # admin = None
     # superadmin = None
-    user = None
-    auth_header = {}
-    users_list = []
+    user: str = None
+    auth_header: ClassVar[dict] = {}
+    users_list: ClassVar[list[str]] = []
+    project_url_part: str = "projects"
 
-    def setUp(self):
-        """Overwrites method setUp from unittest.TestCase class"""
+    # set project_url_part to "locations" if GRASS GIS version < 8.4
+    init_versions()
 
+    grass_version_s: str = G_VERSION["version"]
+    grass_version: ClassVar[list[int]] = [
+        int(item) for item in grass_version_s.split(".")[:2]
+    ]
+    if grass_version < [8, 4]:
+        project_url_part = "locations"
+
+    def setUp(self) -> None:
+        """Overwrite method setUp from unittest.TestCase class."""
         self.app_context = flask_app.app_context()
         self.app_context.push()
         # from http://flask.pocoo.org/docs/0.12/api/#flask.Flask.test_client:
@@ -75,14 +86,14 @@ class ActiniaTestCase(unittest.TestCase):
 
         # create test user for roles user (more to come)
         accessible_datasets = {
-            "nc_spm_08": ["PERMANENT", "user1", "modis_lst"]
+            "nc_spm_08": ["PERMANENT", "user1", "modis_lst"],
         }
         password = pwgen.pwgen()
         (
             self.user_id,
             self.user_group,
             self.user_auth_header,
-        ) = self.createUser(
+        ) = self.create_user(
             name="user",
             role="user",
             password=password,
@@ -94,7 +105,7 @@ class ActiniaTestCase(unittest.TestCase):
             self.restricted_user_id,
             self.restricuted_user_group,
             self.restricted_user_auth_header,
-        ) = self.createUser(
+        ) = self.create_user(
             name="user2",
             role="user",
             password=password,
@@ -107,7 +118,7 @@ class ActiniaTestCase(unittest.TestCase):
             self.admin_id,
             self.admin_group,
             self.admin_auth_header,
-        ) = self.createUser(
+        ) = self.create_user(
             name="admin",
             role="admin",
             password=password,
@@ -121,9 +132,8 @@ class ActiniaTestCase(unittest.TestCase):
         #    create_process_queue
         # create_process_queue(config=global_config)
 
-    def tearDown(self):
-        """Overwrites method tearDown from unittest.TestCase class"""
-
+    def tearDown(self) -> None:
+        """Overwrite method tearDown from unittest.TestCase class."""
         self.app_context.pop()
 
         # remove test user; disconnect redis
@@ -131,22 +141,24 @@ class ActiniaTestCase(unittest.TestCase):
             user.delete()
         redis_interface.disconnect()
 
-    def createUser(
+    def create_user(
         self,
-        name="guest",
-        role="guest",
-        group="group",
-        password="abcdefgh",
-        accessible_datasets=None,
-        accessible_modules=global_config.MODULE_ALLOW_LIST,
-        process_num_limit=1000,
-        process_time_limit=6000,
-    ):
-        auth = bytes("%s:%s" % (name, password), "utf-8")
+        name: str = "guest",
+        role: str = "guest",
+        group: str = "group",
+        password: str = "abcdefgh",
+        accessible_datasets: dict[str, list | None] | None = None,
+        process_num_limit: int = 1000,
+        process_time_limit: int = 6000,
+        accessible_modules: list[str] = global_config.MODULE_ALLOW_LIST,
+    ) -> (str, str, Headers()):
+        """Create actinia user."""
+        auth = bytes(f"{name}:{password}", "utf-8")
         # We need to create an HTML basic authorization header
         self.auth_header[role] = Headers()
         self.auth_header[role].add(
-            "Authorization", "Basic " + base64.b64encode(auth).decode()
+            "Authorization",
+            f"Basic {base64.b64encode(auth).decode()}",
         )
 
         # Make sure the user database is empty
@@ -170,17 +182,18 @@ class ActiniaTestCase(unittest.TestCase):
         return name, group, self.auth_header[role]
 
 
-def check_started_process(testCase, resp):
-    """Checks response of started process - TODO: can be enhanced"""
-    if type(resp.json["process_results"]) == dict:
-        resp.json["process_results"] = str(resp.json["process_results"])
-    resp_class = ProcessingResponseModel(**resp.json)
-    assert resp_class["status"] == "accepted"
-    status_url = resp_class["urls"]["status"]
+# def check_started_process(test_case: , resp: ) -> None:
+#     """Checks response of started process - TODO: can be enhanced."""
+#     if isinstance(resp.json["process_results"], dict):
+#         resp.json["process_results"] = str(resp.json["process_results"])
+#     resp_class = ProcessingResponseModel(**resp.json)
+#     assert resp_class["status"] == "accepted"
+#     status_url = resp_class["urls"]["status"]
 
-    # poll status_url
-    # TODO: status stays in accepted
-    status_resp = testCase.app.get(
-        status_url, headers=testCase.user_auth_header
-    )
-    assert status_resp.json["urls"]["status"] == status_url
+#     # poll status_url
+#     # TODO: status stays in accepted
+#     status_resp = test_case.app.get(
+#         status_url,
+#         headers=test_case.user_auth_header,
+#     )
+#     assert status_resp.json["urls"]["status"] == status_url

@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-Copyright (c) 2018-present mundialis GmbH & Co. KG
+"""Copyright (c) 2018-2025 mundialis GmbH & Co. KG.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,16 +20,14 @@ actinia plugin initalization
 __license__ = "GPLv3"
 __author__ = "Carmen Tawalika, Anika Weinmann"
 __copyright__ = "Copyright 2022 mundialis GmbH & Co. KG"
-__maintainer__ = "mundialis GmbH % Co. KG"
+__maintainer__ = "mundialis GmbH & Co. KG"
 
 
-from pkg_resources import get_distribution, DistributionNotFound
+import importlib.metadata
 
 try:
     # Change here if project is renamed and does not equal the package name
-    dist_name = __name__
-    __version__ = get_distribution(dist_name).version
-except DistributionNotFound:
+    DIST_NAME = __name__
+    __version__ = importlib.metadata.version(DIST_NAME)
+except Exception():
     __version__ = "unknown"
-finally:
-    del get_distribution, DistributionNotFound

@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-Copyright (c) 2016-2022 mundialis GmbH & Co. KG
+"""Copyright (c) 2016-2022 mundialis GmbH & Co. KG.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,19 +17,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Tests: Actinia resource test case base
 """
 
+from __future__ import annotations
+
 import atexit
 import base64
 import os
 import signal
+import tempfile
 import time
+from pathlib import Path
 
-from werkzeug.datastructures import Headers
-
-from actinia_core.testsuite import ActiniaTestCaseBase, URL_PREFIX
-from actinia_core.core.common.user import ActiniaUser
 from actinia_core.core.common.config import global_config
+from actinia_core.core.common.user import ActiniaUser
 from actinia_core.endpoints import create_endpoints
-
+from actinia_core.testsuite import ActiniaTestCaseBase
+from werkzeug.datastructures import Headers
 
 __license__ = "GPLv3"
 __author__ = "Sören Gebbert, Anika Weinmann"
@@ -43,21 +43,22 @@ __maintainer__ = "mundialis GmbH & Co. KG"
 # Create endpoints
 create_endpoints()
 
-redis_pid = None
-server_test = False
-custom_actinia_cfg = False
+REDIS_PID = None
+SERVER_TEST = False
+CUSTOM_ACTINIA_CFG = False
 
 # If this environmental variable is set, then a real http request will be send
 # instead of using the flask test_client.
 if "ACTINIA_SERVER_TEST" in os.environ:
-    server_test = bool(os.environ["ACTINIA_SERVER_TEST"])
+    SERVER_TEST = bool(os.environ["ACTINIA_SERVER_TEST"])
 # Set this variable to use a actinia config file in a docker container
 if "ACTINIA_CUSTOM_TEST_CFG" in os.environ:
-    custom_actinia_cfg = str(os.environ["ACTINIA_CUSTOM_TEST_CFG"])
+    CUSTOM_ACTINIA_CFG = str(os.environ["ACTINIA_CUSTOM_TEST_CFG"])
 
 
-def setup_environment():
-    global redis_pid
+def setup_environment() -> None:
+    """Setuo test environment."""
+    global REDIS_PID
     # Set the port to the test redis server
     global_config.REDIS_SERVER_SERVER = "localhost"
     global_config.REDIS_SERVER_PORT = 7000
@@ -72,28 +73,28 @@ def setup_environment():
     global_config.GRASS_GIS_START_SCRIPT = "/usr/local/bin/grass"
     # global_config.GRASS_DATABASE= "/usr/local/grass_test_db"
     # global_config.GRASS_DATABASE = "%s/actinia/grass_test_db" % home
-    global_config.GRASS_TMP_DATABASE = "/tmp"
+    global_config.GRASS_TMP_DATABASE = tempfile.TemporaryDirectory().name
+    Path(global_config.GRASS_TMP_DATABASE).mkdir(parents=True)
 
-    if server_test is False and custom_actinia_cfg is False:
+    if SERVER_TEST is False and CUSTOM_ACTINIA_CFG is False:
         # Start the redis server for user and logging management
-        redis_pid = os.spawnl(
+        REDIS_PID = os.spawnl(
             os.P_NOWAIT,
             "/usr/bin/redis-server",
             "common/redis.conf",
-            "--port %i" % global_config.REDIS_SERVER_PORT,
+            f"--port {global_config.REDIS_SERVER_PORT}",
         )
         time.sleep(1)
 
-    if server_test is False and custom_actinia_cfg is not False:
-        global_config.read(custom_actinia_cfg)
+    if SERVER_TEST is False and CUSTOM_ACTINIA_CFG is not False:
+        global_config.read(CUSTOM_ACTINIA_CFG)
 
 
-def stop_redis():
-    if server_test is False:
-        global redis_pid
-        # Kill th redis server
-        if redis_pid is not None:
-            os.kill(redis_pid, signal.SIGTERM)
+def stop_redis() -> None:
+    """Stop redis server."""
+    # Kill th redis server
+    if SERVER_TEST is False and REDIS_PID is not None:
+        os.kill(REDIS_PID, signal.SIGTERM)
 
 
 # Register the redis stop function
@@ -103,24 +104,28 @@ setup_environment()
 
 
 class ActiniaResourceTestCaseBase(ActiniaTestCaseBase):
+    """Actinia resource test case base class."""
+
     @classmethod
     def create_user(
         cls,
-        name="guest",
-        role="guest",
-        group="group",
-        password="abcdefgh",
-        accessible_datasets=None,
-        process_num_limit=1000,
-        process_time_limit=6000,
-        accessible_modules=None,
-    ):
-        auth = bytes("%s:%s" % (name, password), "utf-8")
+        name: str = "guest",
+        role: str = "guest",
+        group: str = "group",
+        password: str = "abcdefgh",
+        accessible_datasets: dict[str, list | None] | None = None,
+        process_num_limit: int = 1000,
+        process_time_limit: int = 6000,
+        accessible_modules: list[str] | None = None,
+    ) -> (str, str, Headers()):
+        """Create actinia user."""
+        auth = bytes(f"{name}:{password}", "utf-8")
 
         # We need to create an HTML basic authorization header
         cls.auth_header[role] = Headers()
         cls.auth_header[role].add(
-            "Authorization", "Basic " + base64.b64encode(auth).decode()
+            "Authorization",
+            f"Basic {base64.b64encode(auth).decode()}",
         )
 
         # Make sure the user database is empty
