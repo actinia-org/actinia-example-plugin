@@ -40,7 +40,7 @@ dist/*
 sdist/*
 
 # docker
-docker/redis_data/dump.rdb
+docker/valkey_data/dump.rdb
 !docker/actinia-example-plugin-test/actinia-example-plugin-test.cfg
 
 # linting with shared config file

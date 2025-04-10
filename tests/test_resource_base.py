@@ -43,7 +43,7 @@ __maintainer__ = "mundialis GmbH & Co. KG"
 # Create endpoints
 create_endpoints()
 
-REDIS_PID = None
+KVDB_PID = None
 SERVER_TEST = False
 CUSTOM_ACTINIA_CFG = False
 
@@ -58,12 +58,12 @@ if "ACTINIA_CUSTOM_TEST_CFG" in os.environ:
 
 def setup_environment() -> None:
     """Setuo test environment."""
-    global REDIS_PID
-    # Set the port to the test redis server
-    global_config.REDIS_SERVER_SERVER = "localhost"
-    global_config.REDIS_SERVER_PORT = 7000
-    # Set the path to redis WORKER_LOGFILE
-    # global_config.WORKER_LOGFILE = "/var/log/redis/redis"
+    global KVDB_PID
+    # Set the port to the test kvdb server
+    global_config.KVDB_SERVER_SERVER = "localhost"
+    global_config.KVDB_SERVER_PORT = 7000
+    # Set the path to kvdb WORKER_LOGFILE
+    # global_config.WORKER_LOGFILE = "/var/log/kvdb/kvdb"
 
     # home = os.getenv("HOME")
 
@@ -77,12 +77,12 @@ def setup_environment() -> None:
     Path(global_config.GRASS_TMP_DATABASE).mkdir(parents=True)
 
     if SERVER_TEST is False and CUSTOM_ACTINIA_CFG is False:
-        # Start the redis server for user and logging management
-        REDIS_PID = os.spawnl(
+        # Start the kvdb server for user and logging management
+        KVDB_PID = os.spawnl(
             os.P_NOWAIT,
-            "/usr/bin/redis-server",
-            "common/redis.conf",
-            f"--port {global_config.REDIS_SERVER_PORT}",
+            "/usr/bin/valkey-server",
+            "common/valkey.conf",
+            f"--port {global_config.KVDB_SERVER_PORT}",
         )
         time.sleep(1)
 
@@ -90,15 +90,15 @@ def setup_environment() -> None:
         global_config.read(CUSTOM_ACTINIA_CFG)
 
 
-def stop_redis() -> None:
-    """Stop redis server."""
-    # Kill th redis server
-    if SERVER_TEST is False and REDIS_PID is not None:
-        os.kill(REDIS_PID, signal.SIGTERM)
+def stop_kvdb() -> None:
+    """Stop kvdb server."""
+    # Kill th kvdb server
+    if SERVER_TEST is False and KVDB_PID is not None:
+        os.kill(KVDB_PID, signal.SIGTERM)
 
 
-# Register the redis stop function
-atexit.register(stop_redis)
+# Register the kvdb stop function
+atexit.register(stop_kvdb)
 # Setup the environment
 setup_environment()
 
