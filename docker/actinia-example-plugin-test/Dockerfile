@@ -12,6 +12,8 @@ ENV ACTINIA_CUSTOM_TEST_CFG=/etc/default/actinia-example-plugin-test
 ENV DEFAULT_CONFIG_PATH=/etc/default/actinia-example-plugin-test
 
 # install things only for tests
+# DL3018: Pin versions in apk add
+# hadolint ignore=DL3018
 RUN apk add --no-cache valkey && \
     pip3 install --no-cache-dir iniconfig==2.0.0 colorlog==6.8.2 pwgen==0.8.2.post0 pytest==8.3.5 pytest-cov==6.0.0
 
