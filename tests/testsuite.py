@@ -29,7 +29,7 @@ import unittest
 from typing import ClassVar
 
 import pwgen
-from actinia_core.core.common import redis_interface
+from actinia_core.core.common import kvdb_interface
 from actinia_core.core.common.app import flask_app
 from actinia_core.core.common.config import global_config
 from actinia_core.core.common.user import ActiniaUser
@@ -72,17 +72,17 @@ class ActiniaTestCase(unittest.TestCase):
         flask_app.testing = True
         self.app = flask_app.test_client()
 
-        # Start and connect the redis interface
-        redis_args = (
-            global_config.REDIS_SERVER_URL,
-            global_config.REDIS_SERVER_PORT,
+        # Start and connect the kvdb interface
+        kvdb_args = (
+            global_config.KVDB_SERVER_URL,
+            global_config.KVDB_SERVER_PORT,
         )
         if (
-            global_config.REDIS_SERVER_PW
-            and global_config.REDIS_SERVER_PW is not None
+            global_config.KVDB_SERVER_PW
+            and global_config.KVDB_SERVER_PW is not None
         ):
-            redis_args = (*redis_args, global_config.REDIS_SERVER_PW)
-        redis_interface.connect(*redis_args)
+            kvdb_args = (*kvdb_args, global_config.KVDB_SERVER_PW)
+        kvdb_interface.connect(*kvdb_args)
 
         # create test user for roles user (more to come)
         accessible_datasets = {
@@ -136,10 +136,10 @@ class ActiniaTestCase(unittest.TestCase):
         """Overwrite method tearDown from unittest.TestCase class."""
         self.app_context.pop()
 
-        # remove test user; disconnect redis
+        # remove test user; disconnect kvdb
         for user in self.users_list:
             user.delete()
-        redis_interface.disconnect()
+        kvdb_interface.disconnect()
 
     def create_user(
         self,
