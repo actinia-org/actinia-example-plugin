@@ -110,4 +110,4 @@ The skip of the permission check leads to a skipping of:
 
 Not skipped are:
 * the limit of the cells
-* the mapset/location limitations of the user
+* the mapset/project limitations of the user
