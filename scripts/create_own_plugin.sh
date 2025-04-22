@@ -90,11 +90,11 @@ done
 if [ ! -v "$2" ] && [ "$2" == "git" ]
 then
   git init
-  git add . && git commit -m "actinia plugin created from https://github.com/mundialis/actinia-example-plugin"
+  git add . && git commit -m "actinia plugin created from https://github.com/actinia-org/actinia-example-plugin"
 
   echo ""
   echo "Push the code to an empty repo with:"
   echo "cd ${PLUGIN_NAME}"
   echo "git remote add origin <your_git_remote>"
-  echo "git push origin master"
+  echo "git push origin main"
 fi
