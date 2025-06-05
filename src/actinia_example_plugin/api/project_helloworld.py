@@ -26,7 +26,7 @@ __maintainer__ = "mundialis GmbH & Co. KG"
 from typing import ClassVar
 
 from actinia_core.models.response_models import SimpleResponseModel
-from actinia_core.rest.base.deprecated_locations import (
+from actinia_rest_lib.deprecated_locations import (
     location_deprecated_decorator,
 )
 from flask import jsonify, make_response, request
