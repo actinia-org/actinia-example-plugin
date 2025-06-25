@@ -100,12 +100,12 @@ bash create_own_plugin.sh actinia-ex2-plugin
 ## Hint for the development of actinia plugins
 
 ### skip permission check
-The parameter [`skip_permission_check`](https://github.com/mundialis/actinia_core/blob/main/src/actinia_core/processing/actinia_processing/ephemeral_processing.py#L1420-L1422) (see [example in actinia-statistic plugin](https://github.com/mundialis/actinia_statistic_plugin/blob/master/src/actinia_statistic_plugin/vector_sampling.py#L207))
+The parameter [`skip_permission_check`](https://github.com/actinia-org/actinia-processing-lib/blob/1.1.1/src/actinia_processing_lib/ephemeral_processing.py#L1914-L1917) (see [example in actinia-statistic plugin](https://github.com/actinia-org/actinia-statistic-plugin/blob/0.3.1/src/actinia_statistic_plugin/vector_sampling.py#L224))
 should only be set to `True` if you are sure that you really don't want to check the permissions.
 
 The skip of the permission check leads to a skipping of:
-* [the module check](https://github.com/mundialis/actinia_core/blob/main/src/actinia_core/processing/actinia_processing/ephemeral_processing.py#L579-L589)
-* [the limit of the number of processes](https://github.com/mundialis/actinia_core/blob/main/src/actinia_core/processing/actinia_processing/ephemeral_processing.py#L566-L570)
+* [the module check](https://github.com/actinia-org/actinia-processing-lib/blob/1.1.1/src/actinia_processing_lib/ephemeral_processing.py#L676-L688)
+* [the limit of the number of processes](https://github.com/actinia-org/actinia-processing-lib/blob/1.1.1/src/actinia_processing_lib/ephemeral_processing.py#L658-L667)
 * the limit of the processing time
 
 Not skipped are:

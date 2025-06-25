@@ -27,6 +27,7 @@ keywords = [
     "example",
 ]
 dependencies = [
+    "actinia-rest-lib>=1.0.0",
     "colorlog>=4.2.1",
     "xmltodict",
 ]
