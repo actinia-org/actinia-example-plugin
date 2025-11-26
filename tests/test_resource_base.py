@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""SPDX-FileCopyrightText: (c) 2016-2022 by mundialis GmbH & Co. KG
+"""SPDX-FileCopyrightText: (c) 2016-2022 by mundialis GmbH & Co. KG.
 
 SPDX-License-Identifier: GPL-3.0-or-later
 
