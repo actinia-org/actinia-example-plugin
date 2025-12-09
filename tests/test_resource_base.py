@@ -22,7 +22,7 @@ from actinia_core.endpoints import create_endpoints
 from actinia_core.testsuite import ActiniaTestCaseBase
 from werkzeug.datastructures import Headers
 
-__license__ = "GPLv3"
+__license__ = "GPL-3.0-or-later"
 __author__ = "Sören Gebbert, Anika Weinmann"
 __copyright__ = (
     "Copyright 2016-2022, Sören Gebbert and mundialis GmbH & Co. KG"

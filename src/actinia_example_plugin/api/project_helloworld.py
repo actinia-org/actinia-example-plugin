@@ -6,9 +6,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Hello World class
 """
 
-__license__ = "GPLv3"
+__license__ = "GPL-3.0-or-later"
 __author__ = "Anika Weinmann"
-__copyright__ = "Copyright 2024 mundialis GmbH & Co. KG"
+__copyright__ = "Copyright 2018-2024 mundialis GmbH & Co. KG"
 __maintainer__ = "mundialis GmbH & Co. KG"
 
 
