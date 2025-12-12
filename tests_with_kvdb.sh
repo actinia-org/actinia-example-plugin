@@ -7,7 +7,7 @@
 #               mundialis GmbH & Co. KG, Bonn
 #               https://www.mundialis.de
 #
-# PURPOSE:      This script tests the kvdb (valkey) server
+# PURPOSE:      This script sets up a test environment including the kvdb (valkey) server
 #
 # SPDX-FileCopyrightText: (c) 2022 by mundialis GmbH & Co. KG
 #
@@ -30,14 +30,14 @@ sleep 10
 echo "${ACTINIA_CUSTOM_TEST_CFG}"
 echo "${DEFAULT_CONFIG_PATH}"
 
-if [ "$1" = "dev" ]
+if [ "$1" == "dev" ]
 then
   echo "Executing only 'dev' tests ..."
   pytest -m "dev"
-elif [ "$1" = "integrationtest" ]
+elif [ "$1" == "integrationtest" ]
 then
   pytest -m "integrationtest"
-elif [ "$1" = "unittest" ]
+elif [ "$1" == "unittest" ]
 then
   pytest -m "unittest"
 else
@@ -48,5 +48,8 @@ TEST_RES=$?
 
 # stop kvdb server
 valkey-cli shutdown
+
+# # stop webhook server
+# curl http://0.0.0.0:5005/shutdown
 
 return $TEST_RES
