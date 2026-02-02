@@ -1,4 +1,21 @@
 #!/usr/bin/env sh
+########################################################################
+#
+# MODULE:       tests_with_kvdb.sh
+#
+# AUTHOR(S):    Anika Weinmann
+#               mundialis GmbH & Co. KG, Bonn
+#               https://www.mundialis.de
+#
+# PURPOSE:      This script sets up a test environment including the kvdb (valkey) server
+#
+# SPDX-FileCopyrightText: (c) 2022 by mundialis GmbH & Co. KG
+#
+# REQUIREMENTS: sudo apt install valkey-server
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+########################################################################
 
 # start kvdb server
 valkey-server &
@@ -31,5 +48,8 @@ TEST_RES=$?
 
 # stop kvdb server
 valkey-cli shutdown
+
+# # stop webhook server
+# curl http://0.0.0.0:5005/shutdown
 
 return $TEST_RES

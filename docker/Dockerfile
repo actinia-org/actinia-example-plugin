@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: (c) 2018-2025 by mundialis GmbH & Co. KG
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 # Exception for hadolint-docker-linter:
 # DL3007: using latest is prone to errors if the image will ever update. Pin the version explicitly to a release tag
 # hadolint ignore=DL3007
