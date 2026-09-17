@@ -34,7 +34,7 @@ create_endpoints()
 
 KVDB_PID = None
 SERVER_TEST = False
-CUSTOM_ACTINIA_CFG = False
+CUSTOM_ACTINIA_CFG = False  # pylint: disable=invalid-name
 
 # If this environmental variable is set, then a real http request will be send
 # instead of using the flask test_client.
@@ -42,7 +42,8 @@ if "ACTINIA_SERVER_TEST" in os.environ:
     SERVER_TEST = bool(os.environ["ACTINIA_SERVER_TEST"])
 # Set this variable to use a actinia config file in a docker container
 if "ACTINIA_CUSTOM_TEST_CFG" in os.environ:
-    CUSTOM_ACTINIA_CFG = str(os.environ["ACTINIA_CUSTOM_TEST_CFG"])
+    CUSTOM_TEST_CFG = str(os.environ["ACTINIA_CUSTOM_TEST_CFG"])
+    CUSTOM_ACTINIA_CFG = CUSTOM_TEST_CFG  # pylint: disable=invalid-name
 
 
 def setup_environment() -> None:

@@ -3,6 +3,8 @@
 name: actinia tests
 
 on:
+permissions:
+  contents: read
   push:
     branches: [ main ]
   pull_request:
