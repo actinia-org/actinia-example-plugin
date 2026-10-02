@@ -2,9 +2,10 @@
 
 name: actinia tests
 
-on:
 permissions:
   contents: read
+
+on:
   push:
     branches: [ main ]
   pull_request:
